@@ -18,7 +18,7 @@ function GetStarted() {
           class=" pb-8 md:mr-6"
           count="1"
         >
-          <GreenLink>Join in the app </GreenLink>to get access to the full range
+          <GreenLink >Join in the app </GreenLink >to get access to the full range
           of Starbucks® Rewards benefits. You can also
           <GreenLink> join online.</GreenLink>
         </Steps>
