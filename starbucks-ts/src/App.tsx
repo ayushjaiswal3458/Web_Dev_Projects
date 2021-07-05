@@ -6,9 +6,11 @@ interface Props{
 
 const App: React.FC<Props> = (props) => {
     return (
-        <div>
-            
-        </div>
+      div className="font-sans">
+      
+      <Nav />
+      
+    </div>
     );
 };
     
