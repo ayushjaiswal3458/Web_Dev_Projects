@@ -4,7 +4,7 @@ const { default: RoundedLink2 } = require("./RoundedLink2");
 
 function HeroSection() {
   return (
-    <div className="font-sans bg-cover pt-152px md:bg-mdHero lg:px-8 aspect-w-3 aspect-h-4 md:bg-bottom md:aspect-w-16 md:aspect-h-9 bg-8 bg-Hero mb-72 bg-primary-200">
+    <div className="font-sans bg-bottom bg-cover pt-152px md:bg-mdHero lg:px-8 aspect-w-4 aspect-h-3 md:bg-bottom md:aspect-w-16 md:aspect-h-9 bg-8 bg-Hero mb-72 bg-primary-200">
       <div className="md:flex ">
       <div className="flex flex-col items-center md:px-6 md:justify-center md:min-w-48% md:max-w-400px px-4 py-8 md:items-start ">
         
