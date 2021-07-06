@@ -43,7 +43,7 @@ const ConfirmationDialog: React.FC<Props> = ({
         leaveFrom="translate-y-0"
         leaveTo="-translate-y-full ">
           
-          <div className="fixed z-20 p-5 text-white transform bg-indigo-600 rounded-lg top-24 left-1/3 w-96">
+          <div className="fixed z-20 p-5 text-white transform bg-indigo-600 rounded-lg shadow-lg top-24 left-1/3 w-96">
           <button className="absolute top-0 right-0 float-right " onClick={()=>setIsMenuOpen(false)}><div ><XIcon className="text-center hover:text-red-400 w-7 h-7"></XIcon></div></button>
           <ExclamationIcon className="flex justify-center w-24 h-24 m-auto text-red-600 " ></ExclamationIcon>
             <h2 className="text-2xl font-medium text-center mt-7">{title}</h2>
@@ -53,8 +53,8 @@ const ConfirmationDialog: React.FC<Props> = ({
               )}
             </div>
             <div className="flex justify-center">
-              <button className="w-20 h-10 mr-4 bg-gray-500 rounded-lg hover:bg-gray-800">{okText}</button>
-              <button className="w-20 h-10 bg-red-400 rounded-lg hover:bg-red-600">{cancelText}</button>
+              <button className="w-20 h-10 mr-4 bg-gray-500 rounded-lg shadow-md hover:bg-gray-800">{okText}</button>
+              <button className="w-20 h-10 bg-red-400 rounded-lg shadow-md hover:bg-red-600">{cancelText}</button>
             </div>
           </div>
           
