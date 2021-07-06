@@ -23,7 +23,7 @@ module.exports = {
 
     },
     fontFamily:{
-      'sans':"'Helvetica, Arial, sans-serif'" ,
+      'sans':"'Helvetica Neue',Helvetica, Arial, sans-serif" ,
     },
 
     extend: {
