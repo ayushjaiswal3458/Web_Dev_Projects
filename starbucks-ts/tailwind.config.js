@@ -23,13 +23,12 @@ module.exports = {
 
     },
     fontFamily:{
-      'sans':"'Helvetica Neue',Helvetica, Arial, sans-serif" ,
+      'sans':"'Helvetica Neue',Helvetica, Arial, sans-serif"  ,
     },
 
     extend: {
       backgroundImage: theme => ({
-        'Hero':"url('\star.jpg')" ,
-        'mdHero':"url('\md-star.webp')"
+        
         
        }),
       fontSize:{

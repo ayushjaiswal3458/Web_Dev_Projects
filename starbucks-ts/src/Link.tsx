@@ -12,7 +12,7 @@ const component: React.FC<Props> = (props) => {
     );
 };
     
-component.defaultProps{
+component.defaultProps={
 
 }    
 
