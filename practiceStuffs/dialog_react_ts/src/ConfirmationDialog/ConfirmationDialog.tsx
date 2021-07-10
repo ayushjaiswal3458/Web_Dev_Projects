@@ -30,6 +30,9 @@ const ConfirmationDialog: React.FC<Props> = ({
         >
           {text}
         </p>
+        <form className="p-2 bg-gray-200">
+          <input className=" caret-red-500"></input>
+        </form>
       </div>
       <Transition.Root show={isMenuOpen} as={Fragment}>
           

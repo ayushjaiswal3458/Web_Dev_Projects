@@ -1,7 +1,7 @@
 import React from "react";
 
-interface Props{
-    title:string;
+export interface Props{
+    title:string | React.ReactNode;
     children: React.ReactNode;
 }
 

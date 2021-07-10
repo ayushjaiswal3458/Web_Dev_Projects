@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import Tab from "./Tab";
-import Tabs from "./Tabs";
+import TabList from "./Tabs";
 
 interface Props {}
   const tabs =[
@@ -18,21 +18,22 @@ const App: React.FC<Props> = (props) => {
   
   return (
     <>
-    <Tabs>
+    <TabList>
     {tabs.map((tab) => (
       <Tab title={tab.title}>{tab.content}</Tab>
     )) }
-    </Tabs>
+    </TabList>
 
+    
     <div className="h-40"></div>
-    <Tabs>
+    <TabList>
       <Tab title="25">Tab 1 content</Tab>
       <Tab title="50">Tab 2 content</Tab>
       <Tab title="150">Tab 3 content</Tab>
       <Tab title = "200">Tab 4 content</Tab>
       <Tab title = "400">Tab 5 content</Tab>
 
-    </Tabs>
+    </TabList>
     </>
   );
 };

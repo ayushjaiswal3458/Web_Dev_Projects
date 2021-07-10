@@ -1,14 +1,21 @@
 import { Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
+import Tab  from './Tab';
 
 interface Props{
-    children: React.ReactElement[];
+    children: React.ReactElement[]; // (React.Fc<TabProps>)[]
 }
 
-const Tabs: React.FC<Props> = ({children}) => {
+const TabList: React.FC<Props> = ({children}) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
   
   const tabWidth = 100 /children.length;
+
+  children.forEach(c=>{
+    if(c.type !== Tab) {
+      throw "Children of Tablist should be Tab . Recieved" + c.type;
+    }
+  })
     return (
         <div >
       <div className="pb-1 bg-primary-100">
@@ -46,7 +53,7 @@ const Tabs: React.FC<Props> = ({children}) => {
     );
 };
     
-Tabs.defaultProps={};
+TabList.defaultProps={};
 
     
-export default React.memo(Tabs);
+export default React.memo(TabList);
