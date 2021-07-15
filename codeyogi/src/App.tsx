@@ -17,7 +17,7 @@ function App() {
       <Route path="/" exact>
           <Redirect to="/login" ></Redirect>
         </Route>
-        <Route path={["/login","/signup"]}>
+        <Route path={["/login","/signup"]} exact>
           <AuthPage />
         </Route>
          <Route path={["/dashboard","/recording","/batch/:batchNumber/lecture/:lectureNumber"]}  > 
