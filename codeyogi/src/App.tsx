@@ -1,12 +1,10 @@
-import React from "react";
+
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AppContainerPage from "./pages/AppContainer.page";
 import AuthPage from "./pages/Auth.page";
-import DashboardPage from "./pages/Dashboard.page";
-import LoginPage from "./pages/Login.page";
+
 import NotFoundPage from "./pages/NotFound.page";
-import RecordingPage from "./pages/Recording.page";
-import SignupPage from "./pages/Signup.page";
+
 
 
 

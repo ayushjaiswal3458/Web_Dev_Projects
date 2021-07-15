@@ -1,4 +1,4 @@
-import React from "react";
+
 import {FC, memo } from "react";
 import { Route, RouteChildrenProps, Switch } from "react-router-dom";
 import AuthHero from "../components/AuthHero";

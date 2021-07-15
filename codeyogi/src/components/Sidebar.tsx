@@ -1,4 +1,4 @@
-import React from "react";
+
 import {FC, memo } from "react";
 
 interface Props{

@@ -1,7 +1,7 @@
-import React, { HtmlHTMLAttributes, useState } from "react";
+import React, {  useState } from "react";
 import { FC, memo } from "react";
 import { Link, useHistory } from "react-router-dom";
-import AuthHero from "../components/AuthHero";
+
 import {ImSpinner9} from "react-icons/im";
 import { setTimeout } from "timers";
 
