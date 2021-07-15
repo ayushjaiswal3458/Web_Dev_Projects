@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-      <Route path="/" >
+      <Route path="/" exact>
           <Redirect to="/login" ></Redirect>
         </Route>
         <Route path={["/login","/signup"]} exact>
