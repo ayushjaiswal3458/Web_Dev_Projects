@@ -10,6 +10,8 @@ import { FiLock } from "react-icons/fi";
 import { useFormik } from "formik";
 import Input from "../components/Input";
 
+import { Switch } from "@headlessui/react";
+
 interface Props {}
 
 const Login: FC<Props> = (props) => {
@@ -45,12 +47,14 @@ const Login: FC<Props> = (props) => {
   //   password:yup.string().required().min(8)
   // })
   const history = useHistory();
+  const [isShow, setShow] = useState(false);
   const { handleSubmit, touched, getFieldProps, isSubmitting, errors } =
     useFormik({
       initialValues: {
         email: "",
         password: "",
       },
+
       validationSchema: yup.object().shape({
         email: yup
           .string()
@@ -91,33 +95,51 @@ const Login: FC<Props> = (props) => {
           <div className="">
             <div className="pt-2.75 pb-6.25 mb-2 ">
               <FiUser className="absolute w-6 h-6 text-indigoish" />
-            <Input
-              id="email-address"
-              type="email"
-              autoComplete="email"
-              required
-              {...getFieldProps("email")}
-              touched={touched.email}
-              error={errors.email}
-              placeholder="Email address"
-            />
+              <Input
+                id="email-address"
+                type="email"
+                autoComplete="email"
+                required
+                {...getFieldProps("email")}
+                touched={touched.email}
+                error={errors.email}
+                placeholder="Email address"
+              />
             </div>
             <div className="pt-2.75 pb-6.25 mb-2 ">
               <FiLock className="absolute w-6 h-6 text-indigoish" />
-            <Input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              {...getFieldProps("password")}
-              touched={touched.password}
-              error={errors.password}
-              placeholder="password"
-            />
+              <Input
+                id="password"
+                type={isShow ? "text" : "password"}
+                autoComplete="current-password"
+                required
+                {...getFieldProps("password")}
+                touched={touched.password}
+                error={errors.password}
+                placeholder="password"
+              />
             </div>
           </div>
           <div className="flex justify-between">
-            <p>Show password</p>
+            <div className="flex items-center justify-between">
+              Show password
+              <Switch.Group as="span" className="ml-1.75">
+                <Switch
+                  checked={isShow}
+                  onChange={setShow}
+                  className={`${
+                    isShow ? "bg-indigoish" : "bg-indigo-100"
+                  } relative inline-flex  items-center h-4.5 rounded-full w-8.75`}
+                >
+                  <span className="sr-only">show password</span>
+                  <span
+                    className={`${
+                      isShow ? "translate-x-5" : "translate-x-0"
+                    } inline-block w-3.5 h-3.5 shadow-md transform ease-in-out duration-300 bg-white transition transition-color  rounded-full`}
+                  />
+                </Switch>
+              </Switch.Group>
+            </div>
             <button
               type="submit"
               className="text-white  rounded-md  px-5 py-1.75  text-sm bg-indigoish shadow-xl hover:transform"
@@ -125,6 +147,13 @@ const Login: FC<Props> = (props) => {
               Log In
             </button>
             {isSubmitting && <ImSpinner9 className="animate-spin" />}
+          </div>
+          <div className="text-center">
+          <input type="checkbox" name="keep logged" value="logged in"  />
+          <label htmlFor="keep logged" className="text-gray-400 mt-14" > Keep me logged in</label>
+          <p className="text-base font-semibold tracking-wider text-indigoish mt-3.5">Forgot Password?</p>
+          <p className="mt-24 text-sm">© 2020 All Rights Reserved. <span className="text-indigoish">CORK</span> is a product of Designreset. <span className="text-indigoish">Cookie Preferences, Privacy,</span> and <span className="text-indigoish">Terms.</span></p>
+          <br />
           </div>
         </form>
       </div>

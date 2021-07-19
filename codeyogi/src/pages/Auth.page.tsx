@@ -10,8 +10,8 @@ interface Props{
 }
 
 const Auth: FC<Props> = (props) => (
-    <div className="flex ">
-        <div className="w-1/2">
+    <div className="flex">
+        <div className="w-full Auth:w-1/2">
         <Switch>
             <Route path="/login">
                 <LoginPage />

@@ -17,7 +17,7 @@ const Input: FC<Props> = ({ error, id,touched, className, ...rest }) => {
         id={id}
           {...rest}
           className={
-            "w-full pb-2 pl-8 placeholder-gray-400 border-b-2 outline-none focus:border-indigoish" +
+            "w-full pb-2 pl-8 placeholder-gray-400 border-b-2 outline-none focus:border-indigoish " +
             className
           }
         ></input>
