@@ -4,7 +4,7 @@ import { FiLock, FiUser } from "react-icons/fi";
 import { ImSpinner9 } from "react-icons/im";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import { HiOutlineAtSymbol } from "react-icons/hi";
 import { Switch } from "@headlessui/react";
 
@@ -54,6 +54,7 @@ const Signup: FC<Props> = (props) => {
               type="username"
               autoComplete="username"
               required
+              theme="indigo"
               {...getFieldProps("username")}
               touched={touched.username}
               error={errors.username}
@@ -67,6 +68,7 @@ const Signup: FC<Props> = (props) => {
               type="email"
               autoComplete="email"
               required
+              theme="indigo"
               {...getFieldProps("email")}
               touched={touched.email}
               error={errors.email}
@@ -80,6 +82,7 @@ const Signup: FC<Props> = (props) => {
               type="password"
               autoComplete="current-password"
               required
+              theme="indigo"
               {...getFieldProps("password")}
               touched={touched.password}
               error={errors.password}

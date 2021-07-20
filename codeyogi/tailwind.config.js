@@ -25,7 +25,11 @@ module.exports = {
      },
      colors:{
       'indigoish':'#4361ee',
-      'grayish':'#3b3f5c'
+      'grayish':'#3b3f5c',
+      'blueish':'rgb(33, 150, 243)',
+      'greenish':'rgb(26, 188, 156)',
+      'yellowish':'rgb(226, 160, 63)'
+      
      },
      spacing:{
        '97.1485':'24.287125rem',

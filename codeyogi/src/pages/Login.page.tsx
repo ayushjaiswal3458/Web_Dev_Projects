@@ -8,9 +8,10 @@ import { FiUser } from "react-icons/fi";
 import * as yup from "yup";
 import { FiLock } from "react-icons/fi";
 import { useFormik } from "formik";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 
 import { Switch } from "@headlessui/react";
+import Button from "../components/Button/Button";
 
 interface Props {}
 
@@ -100,6 +101,7 @@ const Login: FC<Props> = (props) => {
                 type="email"
                 autoComplete="email"
                 required
+                theme="indigo"
                 {...getFieldProps("email")}
                 touched={touched.email}
                 error={errors.email}
@@ -113,6 +115,7 @@ const Login: FC<Props> = (props) => {
                 type={isShow ? "text" : "password"}
                 autoComplete="current-password"
                 required
+                theme="indigo"
                 {...getFieldProps("password")}
                 touched={touched.password}
                 error={errors.password}
@@ -140,12 +143,7 @@ const Login: FC<Props> = (props) => {
                 </Switch>
               </Switch.Group>
             </div>
-            <button
-              type="submit"
-              className="text-white  rounded-md  px-5 py-1.75  text-sm bg-indigoish shadow-xl hover:transform"
-            >
-              Log In
-            </button>
+            <Button type="submit" theme="indigo" themeClasses=" "  >Sign in</Button>
             {isSubmitting && <ImSpinner9 className="animate-spin" />}
           </div>
           <div className="text-center">
