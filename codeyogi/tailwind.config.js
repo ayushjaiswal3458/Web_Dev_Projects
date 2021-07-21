@@ -43,7 +43,9 @@ module.exports = {
        '5':'1.25rem',
        '3.5':'0.875rem',
        '4.5':'1.125rem',
-       '8.75':'2.1875rem'
+       '8.75':'2.1875rem',
+       '3.74':'0.9375rem',
+       '85.5':'21.375rem'
      },
      fontFamily:{
        'body':['Nunito', 'sans-serif' ]
