@@ -1,5 +1,5 @@
 import "../../index.css";
-import Input from "../Input/Input";
+
 import Avatars from "./Avatars";
 
 const Avt = {
@@ -15,7 +15,7 @@ const Avt = {
 export const Avatar = (args: any) => <Avatars {...args}></Avatars>;
 
 Avatar.args = {
-  profiles:["\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg","\avatar.jpg"],
+  profiles:[],
   
   className: "",
 };

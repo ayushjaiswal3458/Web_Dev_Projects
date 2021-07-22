@@ -17,7 +17,7 @@ export const main = (args:any) => (<Progress {...args}></Progress>);
 
 main.args={
     
-    counter:24,
+    counter:0,
     className:""
 };
 

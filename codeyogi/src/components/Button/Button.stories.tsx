@@ -1,6 +1,5 @@
 import Button from "./Button";
-import "../../index.css";
-import Input from "../Input/Input";
+
 import OutlineButton from "./OutlineButton";
 
 
