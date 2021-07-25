@@ -1,17 +1,16 @@
-import React from "react";
-import { HtmlHTMLAttributes } from "react";
+
 import { FC, memo } from "react";
-import Progress from "../Progress/Progress";
+
 import Avatar from "./Avatar";
 
 interface Props {
   profiles: string[];
   className?: string;
   
-  theme: "indigo" | "gray" | "blue" | "green" | "yellow";
+  
 }
 
-const Avatars: FC<Props> = ({ profiles,theme, className }) => {
+const Avatars: FC<Props> = ({ profiles, className }) => {
   const profilesArray = profiles;
   let extraProfiles: number;
   if (profilesArray.length > 4) {
@@ -19,7 +18,7 @@ const Avatars: FC<Props> = ({ profiles,theme, className }) => {
   } else {
     extraProfiles = 0;
   }
-  const count = extraProfiles === 0 ? profilesArray.length : 4;
+  
   return (
     <div className={" " + className}>
       {/* <div className="flex justify-between ">
@@ -30,18 +29,18 @@ const Avatars: FC<Props> = ({ profiles,theme, className }) => {
       </div> */}
       <div className="relative flex mt-6 ">
         {profilesArray.map((child, index) => {
-          const distance = index * 8;
+          const distance = index * 2;
           if (index < 4) {
             return (
-              <Avatar src={child} className={" shadow-lg border border-white  absolute left-" + distance} />
+              <Avatar src={child} className="absolute top-0 transition duration-300 ease-in-out transform border border-white shadow-lg hover:-translate-y-2" style={{left:distance+'rem'}} />
             );
           }
-          if (index > 3) {
+          if (index === (profilesArray.length-1)) {
             return (
               <span
                 className={
-                  "absolute left-32 bg-white mt-2 shadow-md rounded-full py-1 px-1.75  text-xs   "
-                }
+                  "absolute left-32   text-indigoish bg-white mt-2 shadow-md rounded-full py-1 px-1.75  text-xs   "
+                } 
               >
                 +{extraProfiles} more
                 
@@ -49,6 +48,7 @@ const Avatars: FC<Props> = ({ profiles,theme, className }) => {
               
             );
           }
+          return 1;
         })}
         
       </div>
@@ -58,7 +58,7 @@ const Avatars: FC<Props> = ({ profiles,theme, className }) => {
 };
 
 Avatars.defaultProps = {
-    theme:'indigo'
+    
 };
 
 export default memo(Avatars);

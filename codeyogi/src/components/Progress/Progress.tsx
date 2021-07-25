@@ -27,9 +27,9 @@ const Progress: FC<Props> = ({className,counter,theme}) => {
     return (
         <div>
         
-        <div className={"rounded-full  bg-gray-50 w-85.5 h-1.5 " + className }>
+        <div className={"rounded-full  bg-gray-100 w-85.5 h-3 " + className }>
         <div className={"absolute right-4 bottom-2 text-indigoish "}>{percent}%</div>
-            <div className={" h-1.5 rounded-full w-" + counter + " " + themeClasses } ></div>
+            <div className={" h-3 rounded-full w-" + counter + " " + themeClasses } ></div>
         </div>
         
         </div>

@@ -15,7 +15,8 @@ export const Inputs = (args: any) => <Input {...args}></Input>;
 
 Inputs.args = {
   placeholder: "Email address",
-
+  touched:false,
+  error:"",
   className: "",
 };
 

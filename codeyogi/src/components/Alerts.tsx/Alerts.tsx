@@ -7,8 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>{
 strong:string;
 children:string;
 theme: "indigo" | "gray" | "blue" | "green" | "yellow";
-themeClasses:string;
-
+themeClasses?:string;
 }
 
 const Alert: FC<Props> = ({strong,theme,themeClasses,children,className,...rest}) => {
@@ -24,12 +23,13 @@ const Alert: FC<Props> = ({strong,theme,themeClasses,children,className,...rest}
         themeClasses="bg-yellowish text-yellowish ";
     }
     return ( 
-        <div className={"p-3.74 bg-opacity-10 flex " + themeClasses + className } >
-            <strong>{strong}</strong>{children}
+        <div className={"p-3.74 bg-opacity-10 flex justify-between rounded items-center " + themeClasses + " " + className } >
+            <div>
+            <strong>{strong}</strong>{children}</div>
             <button
             {...rest}
             >
-                <IoClose />
+                <IoClose className="w-6 h-6" />
             </button>
         </div >
     );

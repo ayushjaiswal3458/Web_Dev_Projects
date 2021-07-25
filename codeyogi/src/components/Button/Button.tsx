@@ -1,16 +1,16 @@
 import React, { ButtonHTMLAttributes } from "react";
 import { FC, memo } from "react";
-import { ImSpinner9 } from "react-icons/im";
-import Solid from "./OutlineButton";
+
 
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme: "indigo" | "gray" | "blue" | "green" | "yellow";
-  children:string;
+  
   themeClasses:string;
+  children:React.ReactNode;
 }
 
-const Button: FC<Props> = ({ className,theme,themeClasses,children, ...rest }) => {
+const Button: FC<Props> = ({ children,className,theme,themeClasses, ...rest }) => {
 //   const themeClasses = "primary "
 //     ? "bg-indigoish focus:ring-indigoish "
 //     : "bg-grayish focus:ring-grayish ";

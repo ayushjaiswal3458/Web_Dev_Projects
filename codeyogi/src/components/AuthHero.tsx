@@ -14,7 +14,7 @@ const AuthHero: FC<Props> = (props) => {
     })
     return (
         <div className="hidden w-1/2 h-screen Auth:inline bg-AuthHero ">
-            <img src={Auth} className="object-cover mx-auto my-24 h-96 w-96" />
+            <img src={Auth} alt="shield" className="object-cover mx-auto my-24 h-96 w-96" />
             
         </div>
     );

@@ -3,7 +3,7 @@ import { FC, memo } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { ImSpinner9 } from "react-icons/im";
-import { setTimeout } from "timers";
+
 import { FiUser } from "react-icons/fi";
 import * as yup from "yup";
 import { FiLock } from "react-icons/fi";
@@ -12,6 +12,7 @@ import Input from "../components/Input/Input";
 
 import { Switch } from "@headlessui/react";
 import Button from "../components/Button/Button";
+import { login } from "../apit";
 
 interface Props {}
 
@@ -65,11 +66,10 @@ const Login: FC<Props> = (props) => {
       }),
 
       onSubmit: (data) => {
-        console.log("form submitting", data);
-        setTimeout(() => {
+        login(data).then((user) => {
           history.push("/dashboard");
-        }, 5000);
-      },
+        });
+      }
     });
 
   return (
@@ -128,6 +128,7 @@ const Login: FC<Props> = (props) => {
               Show password
               <Switch.Group as="span" className="ml-1.75">
                 <Switch
+                type="button"
                   checked={isShow}
                   onChange={setShow}
                   className={`${

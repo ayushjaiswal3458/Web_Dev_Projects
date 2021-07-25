@@ -9,8 +9,17 @@ const ProgressBar = {
     argTypes:{
         theme:{
             control: { type:"select"}
-        }
+        },
+        counter: {
+            control: {
+                type: 'range', min: 4, max: 100, step: 4
+            },
+        },
+
     }
+    
+
+
 };
 
 export const main = (args:any) => (<Progress {...args}></Progress>);

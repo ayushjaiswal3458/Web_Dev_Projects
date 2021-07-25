@@ -12,7 +12,7 @@ import OutlineButton from "./OutlineButton";
         }
     }
 };
-const Outline= {
+ const Outline= {
     title: "Outline Button",
     component: OutlineButton,
     argTypes: {
