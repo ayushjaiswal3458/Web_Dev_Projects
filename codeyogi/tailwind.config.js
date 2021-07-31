@@ -28,7 +28,8 @@ module.exports = {
       'grayish':'#3b3f5c',
       'blueish':'rgb(33, 150, 243)',
       'greenish':'rgb(26, 188, 156)',
-      'yellowish':'rgb(226, 160, 63)'
+      'yellowish':'rgb(226, 160, 63)',
+      'navColor':'rgb(14, 23, 38)'
       
      },
      spacing:{
@@ -45,7 +46,8 @@ module.exports = {
        '4.5':'1.125rem',
        '8.75':'2.1875rem',
        '3.74':'0.9375rem',
-       '85.5':'21.375rem'
+       '85.5':'21.375rem',
+       '13.45':'3.361325rem'
      },
      fontFamily:{
        'body':['Nunito', 'sans-serif' ]
