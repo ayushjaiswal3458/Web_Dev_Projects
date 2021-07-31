@@ -30,8 +30,8 @@ const Input: FC<Props> = ({ error,themeClasses,theme, id,touched, className, ...
         id={id}
           {...rest}
           className={
-            "w-full pb-2 pl-8 placeholder-gray-400 border-b-2 outline-none  " +
-            themeClasses + className
+            " pb-2 pl-8 placeholder-gray-400 border-b-2 outline-none  " +
+            themeClasses + " " + className
           }
         ></input>
         {touched && <div className="text-red-500">{error}</div>}

@@ -12,9 +12,13 @@ import Input from "../components/Input/Input";
 
 import { Switch } from "@headlessui/react";
 import Button from "../components/Button/Button";
-import { login } from "../apit";
+import { login } from "../api/auth";
+import { User } from "../models/User";
 
-interface Props {}
+
+interface Props {
+  onLogin: (u:User) => void;
+}
 
 const Login: FC<Props> = (props) => {
   // const [data, setData] = useState({ email: "", password: "" });
@@ -66,7 +70,8 @@ const Login: FC<Props> = (props) => {
       }),
 
       onSubmit: (data) => {
-        login(data).then((user) => {
+        login(data).then((u) => {
+          props.onLogin(u);
           history.push("/dashboard");
         });
       }
