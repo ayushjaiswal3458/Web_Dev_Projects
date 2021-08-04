@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Switch,
   Route,
@@ -14,12 +14,17 @@ import NotFoundPage from "./pages/NotFound.page";
 import { Suspense } from "react";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/Auth.lazy.page";
-import { User } from "./models/User";
+
 import { useEffect } from "react";
 import { LS_AUTH_TOKEN } from "./api/base";
 import { me } from "./api/auth";
 import Nav from "./NavBar";
-import ProfilePage from "./pages/Profile.page";
+
+import {  useDispatch, useSelector } from "react-redux";
+import  { AppState} from "./store";
+import { User } from "./models/User";
+import NavTwo from "./NavTwo";
+
 // import DashboardPage from "./pages/Dashboard.page";
 // import LoginPage from "./pages/Login.page";
 // import RecordingsPage from "./pages/Recordings.page";
@@ -32,26 +37,29 @@ import ProfilePage from "./pages/Profile.page";
 interface Props {}
 
 const App: React.FC<Props> = (props) => {
-  const [user, setUser] = useState<User>();
+  
   const token = localStorage.getItem(LS_AUTH_TOKEN);
+ 
+  const user = useSelector<AppState , User | undefined>((state) => state.me);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    me().then(
-      (u) => {
-        setUser(u);
-      }
-    );
-  },[]);
+    me().then((u) => dispatch({ type: "me/login", payload: u }));
+  },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (token && !user) {
-    return <div>loading...</div>;
+    return (<div className="bg-indigoish h-screen">
+      <img src="svg-loaders/puff.svg" className="w-44  m-auto h-screen "  alt="" />
+    </div>);
   }
   return (
     <>
+    
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
@@ -67,7 +75,7 @@ const App: React.FC<Props> = (props) => {
                 }
               >
                 {" "}
-                <AuthPageLazy onLogin={setUser} />
+                <AuthPageLazy  />
               </Suspense>
             )}
           </Route>
@@ -79,7 +87,8 @@ const App: React.FC<Props> = (props) => {
               "/batch/:batchNumber/lecture/:lectureNumber",
             ]}
           >
-            <Nav user={user!} />
+            <Nav  />
+            <NavTwo />
             <Suspense
               fallback={
                 <div className="text-red-500">
@@ -88,7 +97,7 @@ const App: React.FC<Props> = (props) => {
               }
             >
               {user ? (
-                <AppContainerPageLazy user={user!} />
+                <AppContainerPageLazy  />
               ) : (
                 <Redirect to="/login" />
               )}
@@ -100,6 +109,7 @@ const App: React.FC<Props> = (props) => {
           </Route>
         </Switch>
       </BrowserRouter>
+      
     </>
   );
 };

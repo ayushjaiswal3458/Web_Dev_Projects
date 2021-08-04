@@ -13,11 +13,14 @@ import Input from "../components/Input/Input";
 import { Switch } from "@headlessui/react";
 import Button from "../components/Button/Button";
 import { login } from "../api/auth";
-import { User } from "../models/User";
+
+
+import { useDispatch} from "react-redux";
+import { ME_LOGIN} from "../store";
 
 
 interface Props {
-  onLogin: (u:User) => void;
+  
 }
 
 const Login: FC<Props> = (props) => {
@@ -53,7 +56,9 @@ const Login: FC<Props> = (props) => {
   //   password:yup.string().required().min(8)
   // })
   const history = useHistory();
+ 
   const [isShow, setShow] = useState(false);
+  const dispatch = useDispatch();
   const { handleSubmit, touched, getFieldProps, isSubmitting, errors } =
     useFormik({
       initialValues: {
@@ -71,11 +76,13 @@ const Login: FC<Props> = (props) => {
 
       onSubmit: (data) => {
         login(data).then((u) => {
-          props.onLogin(u);
+          dispatch({type:ME_LOGIN, payload: u  });
           history.push("/dashboard");
         });
       }
     });
+
+    
 
   return (
     <div className=" font-body text-grayish py-2.8715 px-11.4285 mx-auto w-97.1485 h-148.8985 ">

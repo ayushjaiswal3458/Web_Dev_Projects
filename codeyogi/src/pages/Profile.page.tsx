@@ -1,28 +1,35 @@
 import { useFormik } from "formik";
 import React from "react";
 import {FC, memo } from "react";
+import { useSelector } from "react-redux";
 import * as yup from 'yup';
 import InputTwo from "../components/InputTwo";
 import { User } from "../models/User";
+import { AppState } from "../store";
+
+
 
 
 interface Props{
-    user:User;
+    
 }
 
 
 
-const ProfilePage: FC<Props> = ({user}) => {
+const ProfilePage: FC<Props> = () => {
+
+    
+  const user = useSelector<AppState , User | undefined>((state) => state.me);
 
     const form = useFormik({
         initialValues : {
             
-            firstName: user.first_name,
-            middleName: user.middle_name,
-            lastName: user.last_name,
+            firstName: user!.first_name,
+            middleName: user!.middle_name,
+            lastName: user!.last_name,
             
-            date:user.birth_date,
-            phoneNumber:user.phone_number
+            date:user!.birth_date,
+            phoneNumber:user!.phone_number
         },
         
         validationSchema:yup.object().shape({
@@ -43,7 +50,7 @@ const ProfilePage: FC<Props> = ({user}) => {
             <div className="rounded-md mt-13.45 border shadow-lg p-5">
                 <h2 className="mx-2 mt-1 mb-10">GENERAL INFORMATION</h2>
                 <div className="flex ">
-                    <img src={user.profile_pic_url} className="object-cover rounded-lg shadow mr-11 w-28 h-28" />
+                    <img src={user!.profile_pic_url} alt="" className="object-cover rounded-lg shadow mr-11 w-28 h-28" />
                     <div >
                         <div className="flex">
                     <InputTwo id="firstname" type="name" {...form.getFieldProps("firstName")}  autoComplete="first-name" touched={form.touched.firstName} error={form.errors.firstName} placeholder="First Name " className=" w-96" />

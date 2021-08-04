@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Group } from "../models/Group";
 
-import { BASE_URL, LS_AUTH_TOKEN } from "./base";
+import { BASE_URL} from "./base";
 
 interface GroupRequest {
     limit ? : number;
@@ -19,8 +19,6 @@ export interface GroupResponse {
 
 export const fetchGroups = (data ? : GroupRequest) => {
     const url = BASE_URL + "/groups";
-
-    const token = localStorage.getItem(LS_AUTH_TOKEN);
     return axios.get<GroupResponse>(url, {
         params: data 
     }).then((response) => {
