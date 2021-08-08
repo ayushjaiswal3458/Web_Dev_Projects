@@ -1,8 +1,8 @@
 
 import React from "react";
 import { IoReorderThreeOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
-import { sidebarReducer, useAppSelector } from "./store";
+
+
 
 
 interface Props{
@@ -10,8 +10,8 @@ interface Props{
 }
 
 const NavTwo: React.FC<Props>=(props) => {
-    const isSidebar = useAppSelector((state) => state.sidebar.isSidebarOpen);
-    const dispatch = useDispatch();
+   
+    
     return (
         <nav className="sticky py-2.5  bg-white h-14 z-10 shadow-lg w-screen top-13.45">
             <button>

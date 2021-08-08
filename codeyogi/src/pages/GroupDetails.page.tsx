@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { groupAction } from "../actions/groups.action";
 import { fetchSelectedGroups } from "../api/groups";
-import { groupByIdSelector, groupIdSelector, groupSelector } from "../selectors/groups.selectors";
+import {  groupSelector } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";
 
 interface Props{

@@ -2,9 +2,6 @@
 import {FC, memo } from "react";
 import { Link } from "react-router-dom";
 
-import { logout } from "../api/auth";
-import Button from "./Button/Button";
-
 
 interface Props{
     className?:string;

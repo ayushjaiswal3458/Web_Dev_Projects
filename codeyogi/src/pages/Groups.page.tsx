@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import {  useEffect } from "react";
+
 import { groupAction } from "../actions/groups.action";
-import { fetchGroups, fetchSelectedGroups, GroupRequest } from "../api/groups";
+import { fetchGroups, fetchSelectedGroups } from "../api/groups";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import {
@@ -12,17 +12,15 @@ import {
 import { useAppSelector } from "../store";
 
 import React from "react";
-import { BASE_URL } from "../api/base";
-import axios from "axios";
-import { Group } from "../models/Group";
-import { Link, useHistory } from "react-router-dom";
+
+import {  useHistory } from "react-router-dom";
 
 interface Props {
   className?: string;
 }
 
 const GroupsPage: React.FC<Props> = ({ className }) => {
-  const dispatch = useDispatch();
+  
 
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
