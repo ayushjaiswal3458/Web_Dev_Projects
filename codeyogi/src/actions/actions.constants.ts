@@ -4,3 +4,5 @@ export const ME_LOGIN = "me/login";
 
 export const GROUPS_QUERY = "groups/query";
 export const GROUPS_QUERY_COMPLETED ="groups/query_completed";
+export const SELECT_GROUPID ="groups/id";
+export const SELECT_GROUP ="group/groupid"

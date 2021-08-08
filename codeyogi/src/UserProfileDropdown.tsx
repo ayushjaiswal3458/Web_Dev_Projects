@@ -7,6 +7,7 @@ import { IoExitOutline } from "react-icons/io5";
 
 import { Link } from "react-router-dom";
 import { logout } from "./api/auth";
+import { meSelector } from "./selectors/auth.selectors";
 
 
 import {   useAppSelector} from "./store";
@@ -19,14 +20,18 @@ className?:string;
 
 const UserProfileDropdown: FC<Props> = ({className}) => {
     
-    const user = useAppSelector((state) => state.users.byId[state.auths.id]);
-    console.log(user);
+    const user = useAppSelector(meSelector);
+    
     
     return (
         <Menu as="div" className={` ${className}`}>
             <Fragment >
             <Menu.Button className="bg-white "  >
-                <img src={user!.profile_pic_url} alt="" className="object-cover rounded-lg w-7 h-7" />
+                <img src={user!.profile_pic_url} onError = {(e:any) => {
+                e.target.onerror=null;
+                e.target.src="/avatar.jpg"
+                
+              } } alt="" className="object-cover rounded-lg w-7 h-7" />
             </Menu.Button>
             <Menu.Items className="absolute right-0 w-48 h-40 bg-white rounded-lg shadow-lg outline-none">
                 <Menu.Item>

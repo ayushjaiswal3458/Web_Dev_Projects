@@ -1,9 +1,11 @@
 import axios from "axios";
 import { Group } from "../models/Group";
+import { groupIdSelector } from "../selectors/groups.selectors";
+import { useAppSelector } from "../store";
 
 import { BASE_URL} from "./base";
 
-interface GroupRequest {
+export interface GroupRequest {
     limit ? : number;
     offset ? : number;
     query ? : string;
@@ -15,6 +17,12 @@ export interface GroupResponse {
     data: Group[];
 }
 
+export interface GroupRequestById {
+    id:number;
+}
+export interface GroupResponseById {
+    data:Group;
+}
 
 
 export const fetchGroups = (data ? : GroupRequest) => {
@@ -25,4 +33,9 @@ export const fetchGroups = (data ? : GroupRequest) => {
 
         console.log(response.data);
     return response.data;});
+}
+
+export const fetchSelectedGroups = (data : GroupRequestById ) => {
+    const url = BASE_URL + "/groups/" + data.id;
+    return axios.get<GroupResponseById>(url,{params:data}).then((response) => response.data.data);
 }

@@ -7,7 +7,7 @@ export interface EntityState<T extends Entity = Entity> {
 }
 
 export const addOne = (state: EntityState, entity: Entity) => {
-    return {...state, [entity.id]: entity};
+    return {...state, byId:{ ...state.byId, [entity.id!]: entity}};
 };
 
 export const addMany = (state: EntityState, entities: Entity[]) => {
@@ -18,7 +18,7 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
 
   const entityMap = entities.reduce((prev, entity) => {
 
-    return { ...prev, [entity.id]: entity };
+    return { ...prev, [entity.id!]: entity };
 
   }, {});
 

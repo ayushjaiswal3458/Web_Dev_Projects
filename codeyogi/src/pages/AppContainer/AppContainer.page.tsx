@@ -8,7 +8,8 @@ import LecturePage from "../Lecture.page";
 
 import RecordingPage from "../Recording.page";
 import ProfilePage from "../Profile.page";
-
+import GroupsPage from "../Groups.page";
+import GroupsDetailsPage from "../GroupDetails.page";
 interface Props {
   
 }
@@ -32,6 +33,12 @@ const AppContainer: FC<Props> = () => {
         </Route>
         <Route path="/profile">
             <ProfilePage  />
+          </Route>
+          <Route path = "/groups" exact>
+            <GroupsPage className="mt-13.45 " />
+          </Route>
+          <Route path ="/groups/:id" exact>
+            <GroupsDetailsPage />
           </Route>
       </Switch>
     </div>

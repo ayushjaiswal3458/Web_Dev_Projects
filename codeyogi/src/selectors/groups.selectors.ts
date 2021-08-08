@@ -18,10 +18,14 @@ export const groupQuerySelector = createSelector([groupStateSelector],
     (groupState) => groupState.query);
 
 
-export const groupQueryMapSelector = createSelector([groupStateSelector],(groupState)=>groupState.queryMap)
+export const groupQueryMapSelector = createSelector([groupStateSelector],(groupState)=>groupState.queryMap);
 
-export const groupByIdSelector = createSelector([groupStateSelector],(groupState)=>groupState.byId)
+export const groupByIdSelector = createSelector([groupStateSelector],(groupState)=>groupState.byId);
 
+export const groupIdSelector = createSelector([groupStateSelector] , (groupState) => {
+    console.log("id slected");
+    return groupState.selectedId;
+});
 
 // export const groupSelector = (state: AppState) => {
 //     const query = groupQuerySelector(state);
@@ -34,10 +38,13 @@ export const groupByIdSelector = createSelector([groupStateSelector],(groupState
 //     return groups;
 // }
 
-export const groupSelector = createSelector(
+export const groupsSelector = createSelector(
     [groupQuerySelector, groupByIdSelector, groupQueryMapSelector], (query, byId, queryMap) => {
 
         const groupsIds = queryMap[query] || [];
         const groups = groupsIds.map((id) => byId[id]);
+        
         return groups;
     })
+
+export const groupSelector = createSelector([groupIdSelector,groupByIdSelector] ,(id, byId ) => id!==undefined ?  byId[id!] :undefined );
