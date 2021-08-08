@@ -15,8 +15,8 @@ import Button from "../components/Button/Button";
 import { login } from "../api/auth";
 
 
-import { useDispatch} from "react-redux";
-import { ME_LOGIN} from "../store";
+
+import { authActions } from "../actions/auth.action";
 
 
 interface Props {
@@ -58,7 +58,7 @@ const Login: FC<Props> = (props) => {
   const history = useHistory();
  
   const [isShow, setShow] = useState(false);
-  const dispatch = useDispatch();
+
   const { handleSubmit, touched, getFieldProps, isSubmitting, errors } =
     useFormik({
       initialValues: {
@@ -76,7 +76,7 @@ const Login: FC<Props> = (props) => {
 
       onSubmit: (data) => {
         login(data).then((u) => {
-          dispatch({type:ME_LOGIN, payload: u  });
+          authActions.login(u);
           history.push("/dashboard");
         });
       }

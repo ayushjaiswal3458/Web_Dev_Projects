@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 import React from "react";
 import {FC, memo } from "react";
-import { useSelector } from "react-redux";
 import * as yup from 'yup';
 import InputTwo from "../components/InputTwo";
-import { User } from "../models/User";
-import { AppState } from "../store";
+
+import { useAppSelector } from "../store";
+
 
 
 
@@ -19,7 +19,7 @@ interface Props{
 const ProfilePage: FC<Props> = () => {
 
     
-  const user = useSelector<AppState , User | undefined>((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auths.id]);
 
     const form = useFormik({
         initialValues : {

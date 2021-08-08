@@ -20,10 +20,13 @@ import { LS_AUTH_TOKEN } from "./api/base";
 import { me } from "./api/auth";
 import Nav from "./NavBar";
 
-import {  useDispatch, useSelector } from "react-redux";
-import  { AppState} from "./store";
-import { User } from "./models/User";
+import {  useDispatch } from "react-redux";
+
+
 import NavTwo from "./NavTwo";
+import { useAppSelector } from "./store";
+import { authActions } from "./actions/auth.action";
+
 
 // import DashboardPage from "./pages/Dashboard.page";
 // import LoginPage from "./pages/Login.page";
@@ -40,7 +43,7 @@ const App: React.FC<Props> = (props) => {
   
   const token = localStorage.getItem(LS_AUTH_TOKEN);
  
-  const user = useSelector<AppState , User | undefined>((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auths.id]);
 
   const dispatch = useDispatch();
 
@@ -49,7 +52,7 @@ const App: React.FC<Props> = (props) => {
       return;
     }
 
-    me().then((u) => dispatch({ type: "me/login", payload: u }));
+    me().then((u) => dispatch(authActions.fetch(u)));
   },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (token && !user) {

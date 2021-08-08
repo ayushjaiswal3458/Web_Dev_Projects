@@ -3,13 +3,13 @@ import React, { Fragment } from "react";
 import {FC, memo } from "react";
 import { FiInbox, FiLock, FiUser } from "react-icons/fi";
 import { IoExitOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+
 
 import { Link } from "react-router-dom";
 import { logout } from "./api/auth";
-import { User } from "./models/User";
 
-import {  AppState} from "./store";
+
+import {   useAppSelector} from "./store";
 
 interface Props{
 className?:string;
@@ -19,7 +19,7 @@ className?:string;
 
 const UserProfileDropdown: FC<Props> = ({className}) => {
     
-    const user = useSelector<AppState , User | undefined>((state) => state.me);
+    const user = useAppSelector((state) => state.users.byId[state.auths.id]);
     console.log(user);
     
     return (

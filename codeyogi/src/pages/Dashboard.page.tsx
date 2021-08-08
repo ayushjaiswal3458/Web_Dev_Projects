@@ -9,9 +9,11 @@ import Input from "../components/Input/Input";
 
 import Button from "../components/Button/Button"
 
-import { AppState, GROUP_FETCH, GROUP_FETCH_COMPLETED, ME_FETCH, useAppSelector,} from "../store";
-import { useDispatch, useSelector } from "react-redux";
-import { User } from "../models/User";
+import {  useAppSelector,} from "../store";
+import { useDispatch} from "react-redux";
+
+import { groupAction } from "../actions/groups.action";
+import { groupQuerySelector, groupSelector } from "../selectors/groups.selectors";
 
 interface Props {
   
@@ -19,16 +21,12 @@ interface Props {
 }
 
 const Dashboard: FC<Props> = ({ className }) => {
-  const query = useAppSelector((state) => state.groupQuery);
-  const group = useAppSelector((state) => {
-    const groupIds= state.groupQueryMap[state.groupQuery] || [];
-    const groups = groupIds.map((id) => state.groups[id]);
-    return groups;
-  });
+  const query = useAppSelector(groupQuerySelector);
+  const group = useAppSelector(groupSelector);
   
 
   const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auths.id]);
   
   useEffect(() => {
     fetchGroups({
@@ -36,7 +34,7 @@ const Dashboard: FC<Props> = ({ className }) => {
       
       query: query,
     }).then((data) => {
-      dispatch({type:GROUP_FETCH_COMPLETED, payload:{groups:data.data , query} });
+      dispatch(groupAction.queryCompleted(query,data.data));
       
     });
   }, [query]); //eslint-disable-line  react-hooks/exhaustive-deps
@@ -59,7 +57,8 @@ const Dashboard: FC<Props> = ({ className }) => {
         type="text"
         onChange={(event) => {
 
-        dispatch({type:GROUP_FETCH, payload:event.target.value});}}
+        dispatch(groupAction.query(event.target.value))
+      }}
         className="w-30 mr-2"
       />
       <Button theme="indigo"  themeClasses="" >Find</Button>
