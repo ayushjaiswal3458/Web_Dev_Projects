@@ -1,0 +1,103 @@
+import {  useEffect } from "react";
+
+import { groupAction } from "../actions/groups.action";
+import {  fetchSelectedGroups } from "../api/groups";
+import Button from "../components/Button/Button";
+import Input from "../components/Input/Input";
+import {
+  groupIdSelector,
+  groupQuerySelector,
+  groupsSelector,
+  isGroupLoadingSelector,
+} from "../selectors/groups.selectors";
+import { useAppSelector } from "../store";
+
+import React from "react";
+
+import {  useHistory } from "react-router-dom";
+import { fetchGroups } from "../middlewares/groupsOne.middleware";
+import { ImSpinner2 } from "react-icons/im";
+
+interface Props {
+  className?: string;
+}
+
+const GroupsOnePage: React.FC<Props> = ({ className }) => {
+  
+
+  const query = useAppSelector(groupQuerySelector);
+  const group = useAppSelector(groupsSelector);
+  const isLoading = useAppSelector(isGroupLoadingSelector);
+  const selectedGroupId = useAppSelector(groupIdSelector);
+  
+
+  useEffect(() => {
+    if (selectedGroupId === undefined) {
+      return;
+    }
+    fetchSelectedGroups({ id: selectedGroupId }).then((group) => {
+      groupAction.selectId(group.id);
+      console.log(group.name);
+    }); //eslint-disable-line  react-hooks/exhaustive-deps
+  }, [selectedGroupId]);
+
+  let rowColour: string;
+  const history = useHistory();
+
+  return (
+    <div className={`${className}`}>
+      <div className="flex m-4">
+
+        <Input
+          theme="indigo"
+          placeholder="search"
+          value={query}
+          type="text"
+          onChange={(event) => {
+            fetchGroups({query:event.target.value,status:"all-groups"});
+          }}
+          className="w-30 mr-2"
+        />
+        {isLoading && <ImSpinner2 className="animate-spin w-10 h-10 " /> }
+        <Button theme="indigo" themeClasses="">
+          Find
+        </Button>
+      </div>
+      <div className="m-4 ">
+        {group!.map((profile, index) => {
+          if (index % 2 === 0) {
+            rowColour = "bg-gray-200";
+          } else {
+            rowColour = "bg-gray-400";
+          }
+          return (
+            <div
+              onClick={() => {
+                 groupAction.selectId(profile.id);
+                 history.push("/groups/" + profile.id);
+              }}
+              className={`flex  border rounded-lg mt-2 h-20 w-96 ` + rowColour}
+            >
+              <img
+                src={profile.group_image_url}
+                onError={(e: any) => {
+                  e.target.onerror = null;
+                  e.target.src = "/avatar.jpg";
+                }}
+                className="w-12 h-10 mr-2  mt-2  ml-2 rounded-full"
+                alt=" "
+              />
+              <div>
+                <p className="font-medium mt-2 ">{profile.name}</p>
+                <p className="text-sm  text-gray-500">{profile.description}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+GroupsOnePage.defaultProps = {};
+
+export default React.memo(GroupsOnePage);
