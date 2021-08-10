@@ -8,7 +8,7 @@ import {
   groupIdSelector,
   groupQuerySelector,
   groupsSelector,
-  isGroupLoadingSelector,
+  
 } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";
 
@@ -26,7 +26,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
-  const isLoding = useAppSelector(isGroupLoadingSelector);
+  
   useEffect(() => {
     fetchGroups({
       status: "all-groups",
@@ -59,7 +59,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           value={query}
           type="text"
           onChange={(event) => {
-            groupAction.query(event.target.value,isLoding);
+            groupAction.query(event.target.value);
           }}
           className="w-30 mr-2"
         />
