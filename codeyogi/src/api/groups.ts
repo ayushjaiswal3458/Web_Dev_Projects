@@ -7,7 +7,7 @@ import { BASE_URL} from "./base";
 export interface GroupRequest {
     limit ? : number;
     offset ? : number;
-    query ? : string;
+    query  : string;
     status: "all-groups" | "favourite" | "archived";
     
 }

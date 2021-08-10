@@ -4,6 +4,7 @@ import { combineReducers, createStore, Reducer } from "redux";
 
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/groups.reducer";
+
 import { userReducer } from "./reducers/user.reducer";
 
 //   me?: User;
@@ -33,6 +34,7 @@ export const sidebarReducer:Reducer<SidebarState> = (state = initialState, actio
 const reducer = combineReducers({
     users:userReducer,
     groups:groupReducer,
+    
     auths:authReducer,
     sidebar:sidebarReducer
 })

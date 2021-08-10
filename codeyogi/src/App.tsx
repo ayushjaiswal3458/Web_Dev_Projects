@@ -17,15 +17,18 @@ import AuthPageLazy from "./pages/Auth/Auth.lazy.page";
 
 import { useEffect } from "react";
 import { LS_AUTH_TOKEN } from "./api/base";
-import { me } from "./api/auth";
+
 import Nav from "./NavBar";
 
-import {  useDispatch } from "react-redux";
+
 
 
 import NavTwo from "./NavTwo";
 import { useAppSelector } from "./store";
-import { authActions } from "./actions/auth.action";
+
+import { ImSpinner2 } from "react-icons/im";
+import { me } from "./middlewares/auth.middleware";
+import { meSelector } from "./selectors/auth.selectors";
 
 
 // import DashboardPage from "./pages/Dashboard.page";
@@ -43,21 +46,26 @@ const App: React.FC<Props> = (props) => {
   
   const token = localStorage.getItem(LS_AUTH_TOKEN);
  
-  const user = useAppSelector((state) => state.users.byId[state.auths.id]);
+  const user = useAppSelector(meSelector);
 
-  const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    me().then((u) => dispatch(authActions.fetch(u)));
+    me();
   },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (token && !user) {
-    return (<div className="bg-indigoish h-screen">
-      <img src="svg-loaders/puff.svg" className="w-44  m-auto h-screen "  alt="" />
+    return (<div className="bg-indigoish relative flex flex-col justify-center items-center h-screen">
+     <ImSpinner2 className="animate-spin absolute text-white w-10 h-10 " />
+     <ImSpinner2 className="animate-spin absolute text-white w-14 h-14 " />
+     <ImSpinner2 className="animate-spin  absolute text-white w-20 h-20" />
+     <ImSpinner2 className="animate-spin  absolute text-white w-24 h-24" />
+     <ImSpinner2 className="animate-spin  absolute text-white w-32 h-32" />
+     <ImSpinner2 className="animate-spin  absolute text-white w-36 h-36" />
     </div>);
   }
   return (
@@ -88,9 +96,11 @@ const App: React.FC<Props> = (props) => {
               "/recordings",
               "/profile",
               "/groups",
+              "/groupsone",
+              
               "/groups/:id",
               "/batch/:batchNumber/lecture/:lectureNumber",
-            ]}
+            ]} exact
           >
             <Nav  />
             <NavTwo />

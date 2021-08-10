@@ -54,6 +54,9 @@ module.exports = {
       
       
       
+     },
+     boxShadow : {
+       'light' : 'rgb(67, 97, 238) 0px 10px 20px -10px' 
      }
     },
   },

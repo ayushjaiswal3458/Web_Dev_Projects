@@ -5,9 +5,9 @@ import { GROUPS_QUERY, GROUPS_QUERY_COMPLETED, SELECT_GROUP, SELECT_GROUPID } fr
 
 
 
-export const queryAction = (query : string) => ({
+export const queryAction = (query : string,loading:boolean) => ({
     type:GROUPS_QUERY,
-    payload : query,
+    payload : {query,loading},
 }
 );
 

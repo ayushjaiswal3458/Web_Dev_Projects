@@ -8,6 +8,7 @@ import {
   groupIdSelector,
   groupQuerySelector,
   groupsSelector,
+  isGroupLoadingSelector,
 } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";
 
@@ -25,6 +26,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
+  const isLoding = useAppSelector(isGroupLoadingSelector);
   useEffect(() => {
     fetchGroups({
       status: "all-groups",
@@ -57,7 +59,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           value={query}
           type="text"
           onChange={(event) => {
-            groupAction.query(event.target.value);
+            groupAction.query(event.target.value,isLoding);
           }}
           className="w-30 mr-2"
         />
@@ -86,12 +88,12 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
                   e.target.onerror = null;
                   e.target.src = "/avatar.jpg";
                 }}
-                className="w-12 h-10 mr-2 rounded-full"
+                className="w-12 h-10 mr-2  mt-2  ml-2 rounded-full"
                 alt=" "
               />
               <div>
-                <p className="font-medium">{profile.name}</p>
-                <p className="text-sm text-gray-500">{profile.description}</p>
+                <p className="font-medium mt-2 ">{profile.name}</p>
+                <p className="text-sm  text-gray-500">{profile.description}</p>
               </div>
             </div>
           );

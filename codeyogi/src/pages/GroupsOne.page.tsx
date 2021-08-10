@@ -15,7 +15,7 @@ import { useAppSelector } from "../store";
 import React from "react";
 
 import {  useHistory } from "react-router-dom";
-import { fetchGroups } from "../middlewares/groupsOne.middleware";
+import { fetchGroups } from "../middlewares/groups.middleware";
 import { ImSpinner2 } from "react-icons/im";
 
 interface Props {

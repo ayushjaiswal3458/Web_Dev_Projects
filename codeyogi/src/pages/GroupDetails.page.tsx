@@ -31,7 +31,7 @@ const GroupDetailsPage: React.FC<Props>=(props) => {
     return (
         <div className=" mt-20 mx-4 rounded-lg bg-gray-400 w-full  ">
             
-            <div className="rounded-lg bg-white m-4 p-4">
+            <div className="rounded-lg shadow-lg bg-white m-4 p-4">
             <h1 className="text-xl font-semibold ">Group information </h1>
             <div className="my-2 flex">
                 <img
