@@ -5,10 +5,11 @@ import {  fetchSelectedGroups } from "../api/groups";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import {
+    groupsLoadingSelector,
   groupIdSelector,
   groupQuerySelector,
   groupsSelector,
-  isGroupLoadingSelector,
+  
 } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";
 
@@ -27,7 +28,7 @@ const GroupsOnePage: React.FC<Props> = ({ className }) => {
 
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
-  const isLoading = useAppSelector(isGroupLoadingSelector);
+  const isLoading = useAppSelector(groupsLoadingSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
   
 
@@ -91,9 +92,11 @@ const GroupsOnePage: React.FC<Props> = ({ className }) => {
                 <p className="font-medium mt-2 ">{profile.name}</p>
                 <p className="text-sm  text-gray-500">{profile.description}</p>
               </div>
+              
             </div>
           );
         })}
+        {!isLoading && group.length === 0 && <div className="w-40 h-40 bg-red-500 rounded-xl shadow-lg m-2 p-3">Sorry! Groups not found.</div>}
       </div>
     </div>
   );
