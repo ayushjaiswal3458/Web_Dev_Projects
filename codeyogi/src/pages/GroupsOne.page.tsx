@@ -1,6 +1,6 @@
 import {  useEffect } from "react";
 
-import { groupAction } from "../actions/groups.action";
+import { queryChangedAction } from "../actions/groups.action";
 import {  fetchSelectedGroups } from "../api/groups";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
@@ -18,6 +18,8 @@ import React from "react";
 import {  useHistory } from "react-router-dom";
 import { fetchGroups } from "../middlewares/groups.middleware";
 import { ImSpinner2 } from "react-icons/im";
+import { useDispatch } from "react-redux";
+import { groupAction } from "../actions/groupsid.action";
 
 interface Props {
   className?: string;
@@ -30,7 +32,7 @@ const GroupsOnePage: React.FC<Props> = ({ className }) => {
   const group = useAppSelector(groupsSelector);
   const isLoading = useAppSelector(groupsLoadingSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
-  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedGroupId === undefined) {
@@ -55,7 +57,7 @@ const GroupsOnePage: React.FC<Props> = ({ className }) => {
           value={query}
           type="text"
           onChange={(event) => {
-            fetchGroups({query:event.target.value,status:"all-groups"});
+            dispatch(queryChangedAction(event.target.value));
           }}
           className="w-30 mr-2"
         />
