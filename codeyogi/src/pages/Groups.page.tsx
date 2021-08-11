@@ -16,7 +16,7 @@ import React from "react";
 
 import {  useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { queryChangedAction, queryCompletedAction } from "../actions/groups.action";
+import { queryCompletedAction } from "../actions/groups.action";
 
 interface Props {
   className?: string;

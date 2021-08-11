@@ -16,7 +16,7 @@ import { useAppSelector } from "../store";
 import React from "react";
 
 import {  useHistory } from "react-router-dom";
-import { fetchGroups } from "../middlewares/groups.middleware";
+
 import { ImSpinner2 } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { groupAction } from "../actions/groupsid.action";
