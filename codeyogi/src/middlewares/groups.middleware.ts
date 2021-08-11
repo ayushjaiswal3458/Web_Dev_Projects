@@ -1,25 +1,25 @@
-import axios, { Canceler } from "axios";
-import { groupAction } from "../actions/groups.action";
-import { GroupRequest,fetchGroups as fetchGroupApi } from "../api/groups";
-import { groupsLoadingSelector } from "../selectors/groups.selectors";
+// import axios, { Canceler } from "axios";
+// import { groupAction } from "../actions/groups.action";
+// import { GroupRequest,fetchGroups as fetchGroupApi } from "../api/groups";
+// import { groupsLoadingSelector } from "../selectors/groups.selectors";
 
-import store from "../store";
+// import store from "../store";
 
-let canceler: Canceler | undefined;
+// let canceler: Canceler | undefined;
 
-export const fetchGroups = ( request : GroupRequest) => {
-    const queryLoading = groupsLoadingSelector(store.getState());
-    const query = request.query;
+export const fetchGroups = ( ) => {
+    // const queryLoading = groupsLoadingSelector(store.getState());
+    // const query = request.query;
     
-    groupAction.query(query);
+    // groupAction.queryChanged(query);
 
-    canceler && canceler();
+    // canceler && canceler();
 
-    const {cancel, token} = axios.CancelToken.source();
-    canceler = cancel;
+    // const {cancel, token} = axios.CancelToken.source();
+    // canceler = cancel;
 
-    fetchGroupApi(request, token ).then((response) => {
-        groupAction.queryCompleted(query,response.data);
-        canceler =undefined;
-    });
+    // fetchGroupApi(request, token ).then((response) => {
+    //     groupAction.queryCompleted(query,response.data);
+    //     canceler =undefined;
+    // });
 };

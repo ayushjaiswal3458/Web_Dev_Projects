@@ -1,11 +1,12 @@
-
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { combineReducers, createStore, Reducer } from "redux";
-
+import { applyMiddleware, combineReducers, createStore, Reducer } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/groups.reducer";
 
 import { userReducer } from "./reducers/user.reducer";
+import { sagaMiddleware } from "./sagas";
+import { watchGroupQuerychanged } from "./sagas/groups.sagas";
 
 //   me?: User;
 //   groupQuery: string;
@@ -14,42 +15,41 @@ import { userReducer } from "./reducers/user.reducer";
 //   isSidebarOpen:boolean;
 // }
 
-interface SidebarState{
-    isSidebarOpen:boolean;
+interface SidebarState {
+  isSidebarOpen: boolean;
 }
 const initialState = {
-    isSidebarOpen:false
-}
-export const sidebarReducer:Reducer<SidebarState> = (state = initialState, action) => {
-    switch (action.type){
-        case "sidebar/boolean":
-            return {...state , isSidebarOpen:action.payload}
-        default:
-            return state;
-        
-    }   
-    
-}
+  isSidebarOpen: false,
+};
+export const sidebarReducer: Reducer<SidebarState> = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case "sidebar/boolean":
+      return { ...state, isSidebarOpen: action.payload };
+    default:
+      return state;
+  }
+};
 
 const reducer = combineReducers({
-    users:userReducer,
-    groups:groupReducer,
-    
-    auths:authReducer,
-    sidebar:sidebarReducer
-})
+  users: userReducer,
+  groups: groupReducer,
 
-
+  auths: authReducer,
+  sidebar: sidebarReducer,
+});
 
 const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
+
+sagaMiddleware.run(watchGroupQuerychanged);
 
 export type AppState = ReturnType<typeof reducer>; //or type AppState = ReturnType<typeof store.getState>;
 
 export default store;
-
-
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { groupAction } from "../actions/groups.action";
+import { groupAction } from "../actions/groupsid.action";
 import { fetchSelectedGroups } from "../api/groups";
 import {  groupSelector } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";

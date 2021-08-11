@@ -31,7 +31,7 @@ export const fetchGroups = (data ? : GroupRequest, token?: CancelToken) => {
     }).then((response) => {
 
         console.log(response.data);
-    return response.data;});
+    return response.data.data;});
 }
 
 export const fetchSelectedGroups = (data : GroupRequestById ) => {
