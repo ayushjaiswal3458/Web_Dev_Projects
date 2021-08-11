@@ -1,6 +1,6 @@
 import {  useEffect } from "react";
 
-import { groupAction } from "../actions/groups.action";
+import { groupAction } from "../actions/groupsid.action";
 import { fetchGroups, fetchSelectedGroups } from "../api/groups";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
@@ -15,6 +15,8 @@ import { useAppSelector } from "../store";
 import React from "react";
 
 import {  useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { queryChangedAction, queryCompletedAction } from "../actions/groups.action";
 
 interface Props {
   className?: string;
@@ -26,6 +28,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
+  const dispatch= useDispatch();
   
   useEffect(() => {
     fetchGroups({
@@ -33,7 +36,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
 
       query: query,
     }).then((data) => {
-      groupAction.queryCompleted(query, data.data);
+      dispatch(queryCompletedAction(query, data));
     });
   }, [query]); //eslint-disable-line  react-hooks/exhaustive-deps
 
@@ -59,7 +62,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           value={query}
           type="text"
           onChange={(event) => {
-            groupAction.query(event.target.value);
+            // queryChangedAction(event.target.value);
           }}
           className="w-30 mr-2"
         />
