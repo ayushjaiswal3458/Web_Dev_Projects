@@ -1,10 +1,11 @@
 import {  useEffect } from "react";
 
-import { groupAction } from "../actions/groupsid.action";
-import { fetchGroups, fetchSelectedGroups } from "../api/groups";
-import Button from "../components/Button/Button";
+import { queryChangedAction } from "../actions/groups.action";
+import {  fetchSelectedGroups } from "../api/groups";
+
 import Input from "../components/Input/Input";
 import {
+    groupsLoadingSelector,
   groupIdSelector,
   groupQuerySelector,
   groupsSelector,
@@ -15,30 +16,21 @@ import { useAppSelector } from "../store";
 import React from "react";
 
 import {  useHistory } from "react-router-dom";
+
+import { ImSpinner2 } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { queryCompletedAction } from "../actions/groups.action";
+import { groupAction } from "../actions/groupsid.action";
 
 interface Props {
   className?: string;
 }
 
 const GroupsPage: React.FC<Props> = ({ className }) => {
-  
-
   const query = useAppSelector(groupQuerySelector);
   const group = useAppSelector(groupsSelector);
+  const isLoading = useAppSelector(groupsLoadingSelector);
   const selectedGroupId = useAppSelector(groupIdSelector);
-  const dispatch= useDispatch();
-  
-  useEffect(() => {
-    fetchGroups({
-      status: "all-groups",
-
-      query: query,
-    }).then((data) => {
-      dispatch(queryCompletedAction(query, data));
-    });
-  }, [query]); //eslint-disable-line  react-hooks/exhaustive-deps
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedGroupId === undefined) {
@@ -56,19 +48,19 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   return (
     <div className={`${className}`}>
       <div className="flex m-4">
+
         <Input
           theme="indigo"
           placeholder="search"
           value={query}
           type="text"
           onChange={(event) => {
-            // queryChangedAction(event.target.value);
+            dispatch(queryChangedAction(event.target.value));
           }}
           className="w-30 mr-2"
         />
-        <Button theme="indigo" themeClasses="">
-          Find
-        </Button>
+        {isLoading && <ImSpinner2 className="animate-spin w-10 h-10 " /> }
+        
       </div>
       <div className="m-4 ">
         {group!.map((profile, index) => {
@@ -98,9 +90,12 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
                 <p className="font-medium mt-2 ">{profile.name}</p>
                 <p className="text-sm  text-gray-500">{profile.description}</p>
               </div>
+              
             </div>
           );
         })}
+        {(query!=="" && !isLoading )  && group.length === 0 && <div className="w-40 h-40 bg-red-500 text-white rounded-xl shadow-lg m-2 p-3">Sorry! Groups not found.</div>}
+        {query === "" && <div className="w-40 h-40 bg-blue-500 text-white rounded-xl shadow-lg m-2 p-3 ">search for the groups in above search bar</div>}
       </div>
     </div>
   );

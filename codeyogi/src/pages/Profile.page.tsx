@@ -41,7 +41,7 @@ const ProfilePage: FC<Props> = () => {
     <div className="w-full mx-4 mt-10 ">
       <div className="rounded-md mt-13.45 border shadow-lg p-5">
         <h2 className="mx-2 mt-1 mb-10  ">GENERAL INFORMATION</h2>
-        <form className="  ">
+        <form className="  " onSubmit={form.handleSubmit}>
             <div className="flex">
           <img
             src={user!.profile_pic_url}
@@ -110,7 +110,7 @@ const ProfilePage: FC<Props> = () => {
           <div className=" bg-navColor  left-48 right-0 px-5 py-2 h-12 rounded-lg   fixed bottom-0 ">
           <div className="flex justify-between ">
           <Button
-            type="submit"
+            type="button"
             theme="indigo"
             themeClasses=""
             className="block shadow-light"

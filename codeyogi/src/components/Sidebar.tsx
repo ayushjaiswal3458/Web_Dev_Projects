@@ -14,8 +14,7 @@ const Sidebar: FC<Props> = ({className}) => {
         <div className={`h-screen w-48 pr-5 flex flex-col   bg-gray-200  ${className}` }>
         <button className=" mt-6 rounded-lg hover:bg-indigoish hover:text-white " ><Link to ="/dashboard" >Dashboard</Link></button>
             <button className=" mt-6 block rounded-lg hover:bg-indigoish hover:text-white " ><Link to ="/groups" >groups</Link></button>
-            <button className=" mt-6 block rounded-lg hover:bg-indigoish hover:text-white " ><Link to ="/groupsone" >groups one</Link></button>
-            <button className=" mt-6 block rounded-lg hover:bg-indigoish hover:text-white " ><Link to ="/groupstwo" >groups two</Link></button>
+            
         </div>
         </div>
     );

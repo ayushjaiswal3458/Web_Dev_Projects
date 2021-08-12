@@ -10,7 +10,7 @@ import RecordingPage from "../Recording.page";
 import ProfilePage from "../Profile.page";
 import GroupsPage from "../Groups.page";
 import GroupsDetailsPage from "../GroupDetails.page";
-import GroupsOnePage from "../GroupsOne.page";
+
 
 interface Props {
   
@@ -38,9 +38,6 @@ const AppContainer: FC<Props> = () => {
           </Route>
           <Route path = "/groups" exact>
             <GroupsPage className="mt-13.45 " />
-          </Route>
-          <Route path = "/groupsone" exact>
-            <GroupsOnePage className="mt-13.45 " />
           </Route>
           
           <Route path ="/groups/:id" exact>

@@ -96,7 +96,7 @@ const App: React.FC<Props> = (props) => {
               "/recordings",
               "/profile",
               "/groups",
-              "/groupsone",
+              
               
               "/groups/:id",
               "/batch/:batchNumber/lecture/:lectureNumber",
