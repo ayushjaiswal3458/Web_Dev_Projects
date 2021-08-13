@@ -1,4 +1,4 @@
-import axios, { CancelToken } from "axios";
+import axios, { CancelToken, } from "axios";
 import { Group } from "../models/Group";
 
 
@@ -19,10 +19,9 @@ export interface GroupResponse {
 export interface GroupRequestById {
     id:number;
 }
-export interface GroupResponseById {
-    data:Group;
+export interface GroupOneResponse{
+    group:Group;
 }
-
 
 export const fetchGroups = (data ? : GroupRequest, token?: CancelToken) => {
     const url = BASE_URL + "/groups";
@@ -31,7 +30,7 @@ export const fetchGroups = (data ? : GroupRequest, token?: CancelToken) => {
     });
 }
 
-export const fetchSelectedGroups = (data : GroupRequestById ) => {
-    const url = BASE_URL + "/groups/" + data.id;
-    return axios.get<GroupResponseById>(url,{params:data}).then((response) => response.data.data);
+export const fetchOneGroup = (id: number ) => {
+    const url = BASE_URL + "/groups/" + id;
+    return axios.get<GroupResponse>(url)
 }

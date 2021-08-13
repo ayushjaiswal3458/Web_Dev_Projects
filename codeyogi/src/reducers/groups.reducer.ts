@@ -1,5 +1,6 @@
+import { FETCH_ONE_GROUP, FETCH_ONE_GROUP_COMPLETED } from './../actions/actions.constants';
 import { Reducer } from "redux";
-import { GROUPS_QUERY_CHANGED, GROUPS_QUERY_COMPLETED, SELECT_GROUP, SELECT_GROUPID } from "../actions/actions.constants";
+import { GROUPS_QUERY_CHANGED, GROUPS_QUERY_COMPLETED, SELECT_GROUPID } from "../actions/actions.constants";
 
 import { Group } from "../models/Group";
 import { addMany, addOne, EntityState, getIds } from "./entity.reducer";
@@ -44,11 +45,14 @@ export const groupReducer: Reducer<GroupState> = (
         loading : false
       }
     case SELECT_GROUPID:
+
       return {...state, selectedId:action.payload};  
 
-    case SELECT_GROUP:
-      const group = action.payload as Group;
-      return addOne(state, group ) as GroupState; 
+    case FETCH_ONE_GROUP:
+      return   {...state, selectedId:action.payload};
+    case FETCH_ONE_GROUP_COMPLETED:
+      return addOne(state,action.payload) as GroupState; 
+
     default:
         return state;  
   }

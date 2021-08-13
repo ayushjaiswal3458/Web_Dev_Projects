@@ -17,7 +17,7 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
     }
 
   const entityMap = entities.reduce((prev, entity) => {
-
+    
     return { ...prev, [entity.id!]: entity };
 
   }, {});

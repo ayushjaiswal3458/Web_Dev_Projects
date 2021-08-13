@@ -40,7 +40,7 @@ const AppContainer: FC<Props> = () => {
             <GroupsPage className="mt-13.45 " />
           </Route>
           
-          <Route path ="/groups/:id" exact>
+          <Route path ="/groups/:groupId" exact>
             <GroupsDetailsPage />
           </Route>
       </Switch>

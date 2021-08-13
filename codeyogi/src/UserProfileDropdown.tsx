@@ -5,8 +5,10 @@ import { FiInbox, FiLock, FiUser } from "react-icons/fi";
 import { IoExitOutline } from "react-icons/io5";
 
 
+
 import { Link } from "react-router-dom";
-import { logout } from "./api/auth";
+import { onLogoutAction } from "./actions/auth.action";
+
 import { meSelector } from "./selectors/auth.selectors";
 
 
@@ -27,7 +29,7 @@ const UserProfileDropdown: FC<Props> = ({className}) => {
         <Menu as="div" className={` ${className}`}>
             <Fragment >
             <Menu.Button className="bg-white "  >
-                <img src={user!.profile_pic_url} onError = {(e:any) => {
+                <img src={user && user.profile_pic_url} onError = {(e:any) => {
                 e.target.onerror=null;
                 e.target.src="/avatar.jpg"
                 
@@ -63,8 +65,8 @@ const UserProfileDropdown: FC<Props> = ({className}) => {
                 </Menu.Item>
                 <Menu.Item>
                     { ({active }) => (
-                        <button  onClick={() => { logout();
-                            window.location.href = "/login";}} className={`py-2 flex px-3.5 ${active ? "text-indigoish" : "text-black" } `} >
+                        <button  onClick={() => { onLogoutAction();
+                            }} className={`py-2 flex px-3.5 ${active ? "text-indigoish" : "text-black" } `} >
                             <IoExitOutline className = {`w-4 h-4 mt-2 ${active ? "text-indigoish" : "text-black" } `} />
                             Sign Out
                         </button>

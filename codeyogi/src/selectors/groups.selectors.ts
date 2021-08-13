@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 // import { AppState } from "../store";
-import { groupStateSelector } from "./app.selectors";
+import { groupsStateSelector } from "./app.selectors";
 
 // export const groupQuerySelector = (state: AppState) => {
 //     const groupState = groupStateSelector(state);
@@ -14,15 +14,15 @@ import { groupStateSelector } from "./app.selectors";
 // }
 
 
-export const groupQuerySelector = createSelector([groupStateSelector],
+export const groupQuerySelector = createSelector([groupsStateSelector],
     (groupState) => groupState.query);
 
 
-export const groupQueryMapSelector = createSelector([groupStateSelector],(groupState)=>groupState.queryMap);
+export const groupQueryMapSelector = createSelector([groupsStateSelector],(groupState)=>groupState.queryMap);
 
-export const groupByIdSelector = createSelector([groupStateSelector],(groupState)=>groupState.byId);
+export const groupByIdSelector = createSelector([groupsStateSelector],(groupState)=>groupState.byId);
 
-export const groupIdSelector = createSelector([groupStateSelector] , (groupState) => {
+export const groupIdSelector = createSelector([groupsStateSelector] , (groupState) => {
     console.log("id slected");
     return groupState.selectedId;
 });
@@ -37,7 +37,7 @@ export const groupIdSelector = createSelector([groupStateSelector] , (groupState
 //     const groups = groupsIds.map((id)=>byId[id]);
 //     return groups;
 // }
-export const groupsLoadingSelector = createSelector([groupStateSelector] , (groupState) => groupState.loading);
+export const groupsLoadingSelector = createSelector([groupsStateSelector] , (groupState) => groupState.loading);
 
 
 
@@ -50,4 +50,4 @@ export const groupsSelector = createSelector(
         return groups;
     })
 
-export const groupSelector = createSelector([groupIdSelector,groupByIdSelector] ,(id, byId ) => id!==undefined ?  byId[id!] :undefined );
+export const groupSelector = createSelector([groupIdSelector,groupByIdSelector] ,(id, byId ) =>   byId[id!]);

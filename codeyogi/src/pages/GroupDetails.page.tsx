@@ -1,9 +1,10 @@
 
 import React from "react";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { groupAction } from "../actions/groupsid.action";
-import { fetchSelectedGroups } from "../api/groups";
+import { fetchOneGroup } from "../actions/groups.action";
+
 import {  groupSelector } from "../selectors/groups.selectors";
 import { useAppSelector } from "../store";
 
@@ -14,19 +15,18 @@ interface Props{
 const GroupDetailsPage: React.FC<Props>=(props) => {
     
     const group = useAppSelector(groupSelector);
-    const {id} = useParams<any>();
-   
-    console.log(id);
-    useEffect(() => {
+    const groupId = +useParams<{groupId:string}>().groupId;
+    console.log(groupId);
+    const dispatch = useDispatch();
+    useEffect(()=> {
         
-        fetchSelectedGroups({id:id}).then((group) => {
-            groupAction.selectGroup(group);
-
-            groupAction.selectId(id)} );
+        dispatch(fetchOneGroup(groupId));
+    },[groupId]) //eslint-disable-line
         
-    },[id]
-
-    );
+    
+        
+    
+    
     if(group){
     return (
         <div className=" mt-20 mx-4 rounded-lg bg-gray-400 w-full  ">

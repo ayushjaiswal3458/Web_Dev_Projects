@@ -5,8 +5,8 @@ import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/groups.reducer";
 
 import { userReducer } from "./reducers/user.reducer";
-import { sagaMiddleware } from "./sagas";
-import { watchGroupQuerychanged } from "./sagas/groups.sagas";
+import { rootSaga, sagaMiddleware } from "./sagas";
+
 
 //   me?: User;
 //   groupQuery: string;
@@ -46,7 +46,8 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(watchGroupQuerychanged);
+sagaMiddleware.run(rootSaga);
+
 
 export type AppState = ReturnType<typeof reducer>; //or type AppState = ReturnType<typeof store.getState>;
 

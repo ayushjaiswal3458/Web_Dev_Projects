@@ -1,18 +1,25 @@
-import { bindActionCreators } from "redux";
+
+import { LoginRequest } from "../api/auth";
 import { User } from "../models/User";
-import store from "../store";
-import { ME_FETCH, ME_LOGIN } from "./actions.constants";
+
+import { ME_FETCH, ME_LOGIN, ON_LOGIN, ON_LOGOUT, USER_FETCH } from "./actions.constants";
 
 
- const meFetchAction = (u: User) => ({
+ export const meFetchAction = (u: User) => ({
     type:ME_FETCH, payload: u
 });
 
- const meLoginAction =   (u: User) => ({
+ export const meLoginAction =   (u: User) => ({
     type:ME_LOGIN, payload: u
 });
+export const onLoginAction = (data:LoginRequest) => ({
+    type:ON_LOGIN,payload:data
+})
 
-export const authActions = bindActionCreators({
-    fetch : meFetchAction,
-    login: meLoginAction
-} , store.dispatch)
+export const onLogoutAction = () => ({
+    type:ON_LOGOUT
+});
+
+export const userFetchAction = () => ({
+    type:USER_FETCH
+})

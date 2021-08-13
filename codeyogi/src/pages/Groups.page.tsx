@@ -1,7 +1,7 @@
 import {  useEffect } from "react";
 
-import { queryChangedAction } from "../actions/groups.action";
-import {  fetchSelectedGroups } from "../api/groups";
+import { fetchOneGroup, queryChangedAction } from "../actions/groups.action";
+
 
 import Input from "../components/Input/Input";
 import {
@@ -15,11 +15,11 @@ import { useAppSelector } from "../store";
 
 import React from "react";
 
-import {  useHistory } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
 import { ImSpinner2 } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { groupAction } from "../actions/groupsid.action";
+
 
 interface Props {
   className?: string;
@@ -36,14 +36,11 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
     if (selectedGroupId === undefined) {
       return;
     }
-    fetchSelectedGroups({ id: selectedGroupId }).then((group) => {
-      groupAction.selectId(group.id);
-      console.log(group.name);
-    }); //eslint-disable-line  react-hooks/exhaustive-deps
+    fetchOneGroup( selectedGroupId); //eslint-disable-line  react-hooks/exhaustive-deps
   }, [selectedGroupId]);
 
   let rowColour: string;
-  const history = useHistory();
+
 
   return (
     <div className={`${className}`}>
@@ -71,10 +68,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           }
           return (
             <div
-              onClick={() => {
-                 groupAction.selectId(profile.id);
-                 history.push("/groups/" + profile.id);
-              }}
+              
               className={`flex  border rounded-lg mt-2 h-20 w-96 ` + rowColour}
             >
               <img
@@ -86,10 +80,10 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
                 className="w-12 h-10 mr-2  mt-2  ml-2 rounded-full"
                 alt=" "
               />
-              <div>
+              <Link to={`/groups/${profile.id}`}>
                 <p className="font-medium mt-2 ">{profile.name}</p>
                 <p className="text-sm  text-gray-500">{profile.description}</p>
-              </div>
+              </Link>
               
             </div>
           );

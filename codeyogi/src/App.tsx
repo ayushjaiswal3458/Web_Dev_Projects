@@ -27,8 +27,10 @@ import NavTwo from "./NavTwo";
 import { useAppSelector } from "./store";
 
 import { ImSpinner2 } from "react-icons/im";
-import { me } from "./middlewares/auth.middleware";
+
 import { meSelector } from "./selectors/auth.selectors";
+import { useDispatch } from "react-redux";
+import {  userFetchAction } from "./actions/auth.action";
 
 
 // import DashboardPage from "./pages/Dashboard.page";
@@ -47,6 +49,7 @@ const App: React.FC<Props> = (props) => {
   const token = localStorage.getItem(LS_AUTH_TOKEN);
  
   const user = useAppSelector(meSelector);
+  const dispatch = useDispatch();
 
 
 
@@ -55,9 +58,9 @@ const App: React.FC<Props> = (props) => {
       return;
     }
 
-    me();
+    dispatch(userFetchAction());
   },[]); // eslint-disable-line react-hooks/exhaustive-deps
-
+ 
   if (token && !user) {
     return (<div className="bg-indigoish relative flex flex-col justify-center items-center h-screen">
      <ImSpinner2 className="animate-spin absolute text-white w-10 h-10 " />
@@ -68,6 +71,7 @@ const App: React.FC<Props> = (props) => {
      <ImSpinner2 className="animate-spin  absolute text-white w-36 h-36" />
     </div>);
   }
+ 
   return (
     <>
     
@@ -98,7 +102,7 @@ const App: React.FC<Props> = (props) => {
               "/groups",
               
               
-              "/groups/:id",
+              "/groups/:groupId",
               "/batch/:batchNumber/lecture/:lectureNumber",
             ]} exact
           >
