@@ -1,6 +1,6 @@
 import {  useEffect } from "react";
 
-import { fetchOneGroup, queryChangedAction } from "../actions/groups.action";
+import {  queryChangedAction } from "../actions/groups.action";
 
 
 import Input from "../components/Input/Input";
@@ -33,11 +33,8 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (selectedGroupId === undefined) {
-      return;
-    }
-    fetchOneGroup( selectedGroupId); //eslint-disable-line  react-hooks/exhaustive-deps
-  }, [selectedGroupId]);
+   dispatch(queryChangedAction(""));
+  }, [selectedGroupId]);//eslint-disable-line  react-hooks/exhaustive-deps
 
   let rowColour: string;
 
@@ -89,7 +86,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           );
         })}
         {(query!=="" && !isLoading )  && group.length === 0 && <div className="w-40 h-40 bg-red-500 text-white rounded-xl shadow-lg m-2 p-3">Sorry! Groups not found.</div>}
-        {query === "" && <div className="w-40 h-40 bg-blue-500 text-white rounded-xl shadow-lg m-2 p-3 ">search for the groups in above search bar</div>}
+        
       </div>
     </div>
   );

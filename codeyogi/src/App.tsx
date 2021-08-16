@@ -100,8 +100,8 @@ const App: React.FC<Props> = (props) => {
               "/recordings",
               "/profile",
               "/groups",
-              
-              
+              "/people",
+              "/people/:id",
               "/groups/:groupId",
               "/batch/:batchNumber/lecture/:lectureNumber",
             ]} exact

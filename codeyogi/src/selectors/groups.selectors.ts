@@ -37,7 +37,7 @@ export const groupIdSelector = createSelector([groupsStateSelector] , (groupStat
 //     const groups = groupsIds.map((id)=>byId[id]);
 //     return groups;
 // }
-export const groupsLoadingSelector = createSelector([groupsStateSelector] , (groupState) => groupState.loading);
+export const groupsLoadingSelector = createSelector([groupsStateSelector] , (groupState) => groupState.loadingList);
 
 
 
@@ -50,4 +50,11 @@ export const groupsSelector = createSelector(
         return groups;
     })
 
-export const groupSelector = createSelector([groupIdSelector,groupByIdSelector] ,(id, byId ) =>   byId[id!]);
+export const groupSelector = createSelector([groupIdSelector,groupByIdSelector] ,(id, byId ) =>  id && byId[id]);
+
+ 
+export const nextIdSelector = createSelector([groupsStateSelector] ,(groupState) => groupState.nextId);
+export const prevIdSelector = createSelector([groupsStateSelector] ,(groupState) => groupState.prevId);
+
+export const groupLoadingSelector = createSelector([groupsStateSelector],(state) => state.loadingOne);
+export const groupOneErrorSelector = createSelector([groupsStateSelector], (state) => state.errorOne);

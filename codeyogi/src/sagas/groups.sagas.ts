@@ -4,7 +4,7 @@ import { FETCH_ONE_GROUP, GROUPS_QUERY_CHANGED } from "../actions/actions.consta
 import {call, put, takeLatest,delay,takeEvery,all} from "@redux-saga/core/effects"
 import { fetchGroups as fetchGroupsAPI,fetchOneGroup } from "../api/groups";
 import { AnyAction } from "redux";
-import { fetchOneGroupCompleted, queryCompletedAction } from "../actions/groups.action";
+import { fetchOneGroupCompleted, fetchOneGroupError, queryCompletedAction } from "../actions/groups.action";
 
  function* fetchGroups(action: AnyAction): Generator<any> {
     
@@ -16,11 +16,16 @@ import { fetchOneGroupCompleted, queryCompletedAction } from "../actions/groups.
 
 function* fetchOne(action: AnyAction): Generator<any> {
     
-    console.log("generator function called");
+    try{
+        console.log("saga");
     const groupRes:any = yield call(fetchOneGroup,action.payload);
-    
-    console.log("fetch one completed");
+
     yield put(fetchOneGroupCompleted(groupRes.data.data));
+    }catch(e){
+        const error = e.response.data?.message || "Some error occured";
+        console.log(error);
+        yield put(fetchOneGroupError(action.payload,error));
+    }
     
 }
 

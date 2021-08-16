@@ -3,6 +3,7 @@ import { applyMiddleware, combineReducers, createStore, Reducer } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/groups.reducer";
+import { peopleReducer } from "./reducers/people.reducer";
 
 import { userReducer } from "./reducers/user.reducer";
 import { rootSaga, sagaMiddleware } from "./sagas";
@@ -36,7 +37,7 @@ export const sidebarReducer: Reducer<SidebarState> = (
 const reducer = combineReducers({
   users: userReducer,
   groups: groupReducer,
-
+  people:peopleReducer,
   auths: authReducer,
   sidebar: sidebarReducer,
 });
