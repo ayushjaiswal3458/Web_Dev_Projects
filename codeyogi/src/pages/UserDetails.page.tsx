@@ -19,21 +19,21 @@ const UserDetailsPage: React.FC<Props> = ({ className }) => {
     dispatch(fetchOneUser(id));
   }, [id]);//eslint-disable-line  react-hooks/exhaustive-deps
   return (
-    <div className="m-4 mt-13.45 p-20 bg-gray-400 w-full">
+    <div className="m-4 mt-20 p-16 bg-gray-400 rounded-lg w-full h-screen">
       {user && (
-        <div className="p-4 relative shadow-2xl h-64 bg-indigo-400 rounded-lg ">
-          <div className=" absolute -top-14 -left-10 ">
+        <div className="p-4 relative shadow-2xl md:h-64 h-68 bg-indigo-400 rounded-lg ">
+          <div className=" absolute -top-14 left-1/4 md:-top-14 md:-left-10 ">
             <img
               src={user.profile_pic_url}
               onError={(e: any) => {
                 e.target.onerror = null;
                 e.target.src = "/avatar.jpg";
               }}
-              className="w-48 h-48 shadow-2xl mr-2 rounded-lg"
+              className="lg:w-48 lg:h-48 w-32 h-32 shadow-2xl mr-2 rounded-lg"
               alt=" "
             />
           </div>
-          <div className="flex   font-medium text-lg text-white mt-10  items-end justify-end ">
+          <div className="flex   font-medium text-lg text-white md:mt-12 mt-14 md:mr-20 items-center lg:items-end md:justify-end justify-center ">
             <div className="flex flex-col space-y-2">
               <p className=" p-1 rounded-lg   shadow-2xl">UserId: {user.id}</p>
               <p className=" p-1 rounded-lg   shadow-2xl"> 
