@@ -10,6 +10,7 @@ export interface EntityState<T extends Entity = Entity> {
   nextId?:number;
   prevId?:number;
   errorOne?:string;
+  creators?:{[groupId: number] : number};
 }
 
 export const initialEntityState = {
@@ -27,7 +28,7 @@ export const select = (state:EntityState, id:number,nextId:number,prevId:number)
 }
 export const addOne = (state: EntityState, entity: Entity, loading?:boolean) => {
   const newLoading = loading===undefined ? state.loadingOne : loading; 
-    return {...state, byId:{ ...state.byId, [entity.id!]: entity}, loadingOne:newLoading };
+    return {...state, byId:{ ...state.byId, [entity.id!]: entity}, loadingOne:newLoading, };
 };
 
 export const addMany = (state: EntityState, entities: Entity[]) => {

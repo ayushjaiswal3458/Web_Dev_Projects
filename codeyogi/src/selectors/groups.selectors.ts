@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 // import { AppState } from "../store";
 import { groupsStateSelector } from "./app.selectors";
+import { usersByIdSelector } from "./users.selectors";
 
 // export const groupQuerySelector = (state: AppState) => {
 //     const groupState = groupStateSelector(state);
@@ -58,3 +59,6 @@ export const prevIdSelector = createSelector([groupsStateSelector] ,(groupState)
 
 export const groupLoadingSelector = createSelector([groupsStateSelector],(state) => state.loadingOne);
 export const groupOneErrorSelector = createSelector([groupsStateSelector], (state) => state.errorOne);
+export const groupCreatorByIdSelector = createSelector([groupsStateSelector] , (state) => state.creators);
+export const groupCreatorIdSelector = createSelector([groupCreatorByIdSelector,groupIdSelector], (byId,id) => id && byId[id] );
+export const groupCreatorSelector = createSelector([usersByIdSelector,groupCreatorIdSelector] , (byId, id) => id && byId[id]);

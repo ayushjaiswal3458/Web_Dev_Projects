@@ -10,6 +10,9 @@ interface GroupState extends EntityState<Group>{
   query: string;
   
   queryMap: { [query: string]: number[] };
+
+  creators: {[groupId: number ] : number}; //one to many 
+  // members: { [groupId : number] : number[]}; //many to many User<>Group
   
 }
 
@@ -17,7 +20,7 @@ const initialState = {
  ...initialEntityState,
   query: "",
   queryMap: {},
-  
+  creators:{}
   
 };
 
@@ -71,12 +74,14 @@ export const groupReducer: Reducer<GroupState> = (
       return   select(state,currId, nextId, prevId) as GroupState;
 
     case FETCH_ONE_GROUP_COMPLETED:
-      
-      return addOne(state,action.payload,false) as GroupState; 
+      const group = action.payload as Group;
+      const newGroupState = addOne(state,group,false) as GroupState; 
+      return {...newGroupState,creators:{...newGroupState.creators,[group.id]:group.creator.id}};
     case FETCH_ONE_GROUP_ERROR:
       const {id, msg} =action.payload;
       
       return setErrorOne(state,id,msg) as GroupState;
+      
     default:
         return state;  
   }

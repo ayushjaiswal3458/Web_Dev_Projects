@@ -1,4 +1,5 @@
 import {
+  FETCH_ONE_GROUP_COMPLETED,
   FETCH_ONE_USER,
   FETCH_ONE_USER_COMPLETED,
   FETCH_ONE_USER_ERROR,
@@ -21,6 +22,7 @@ interface PeopleState extends EntityState<People> {}
 
 const initialState = {
   ...initialEntityState,
+
 };
 
 export const peopleReducer: Reducer<PeopleState> = (
@@ -47,7 +49,8 @@ export const peopleReducer: Reducer<PeopleState> = (
       const { id, msg } = action.payload;
 
       return setErrorOne(state, id, msg) as PeopleState;
-
+    case FETCH_ONE_GROUP_COMPLETED:
+      return addOne(state,action.payload.creator) as PeopleState;  
     default:
         return state;  
   }

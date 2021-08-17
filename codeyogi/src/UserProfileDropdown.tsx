@@ -6,8 +6,9 @@ import { IoExitOutline } from "react-icons/io5";
 
 
 
-import { Link } from "react-router-dom";
-import { onLogoutAction } from "./actions/auth.action";
+import { Link, useHistory } from "react-router-dom";
+
+import { meLogout } from "./api/auth";
 
 import { meSelector } from "./selectors/auth.selectors";
 
@@ -23,7 +24,7 @@ className?:string;
 const UserProfileDropdown: FC<Props> = ({className}) => {
     
     const user = useAppSelector(meSelector);
-    
+    const history = useHistory();
     
     return (
         <Menu as="div" className={` ${className}`}>
@@ -65,7 +66,8 @@ const UserProfileDropdown: FC<Props> = ({className}) => {
                 </Menu.Item>
                 <Menu.Item>
                     { ({active }) => (
-                        <button  onClick={() => { onLogoutAction();
+                        <button  onClick={() => { meLogout();
+                            history.push("/login");
                             }} className={`py-2 flex px-3.5 ${active ? "text-indigoish" : "text-black" } `} >
                             <IoExitOutline className = {`w-4 h-4 mt-2 ${active ? "text-indigoish" : "text-black" } `} />
                             Sign Out

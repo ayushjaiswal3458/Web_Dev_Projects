@@ -13,6 +13,7 @@ interface Props {
 const UserDetailsPage: React.FC<Props> = ({ className }) => {
   const id = +useParams<{ id: string }>().id;
   const user = useAppSelector(userSelector);
+  
   const dispatch = useDispatch();
   console.log(id);
   useEffect(() => {
