@@ -1,23 +1,27 @@
 import { Entity } from "./Entity";
 
 export interface User extends Entity {
-  
-  first_name?: string;
-  middle_name?: string;
-  last_name?: string;
-  profile_pic_url?: string;
-  phone_number?: string;
-  alternate_phone_number?: string;
-  email?: string;
-
-  birth_year?: string;
-  birth_month?: string;
-  birth_date?: string;
-  death_year?: string;
-  death_month?: string;
-  death_date?: string;
-  party?: string;
-  home_state_code?: string;
-  education?: string;
-  hometown?: string;
+  _type:                      string;
+    guid:                        string;
+    first_name:                  string;
+    middle_name:                 string;
+    last_name:                   string;
+   
+    profile_pic_url:             string;
+    email:                       string;
+    job_type:                    string;
+    phone_number:                string;
+    gender:                      string;
+    birth_year:                  Date;
+    birth_month:                 Date;
+    birth_date:                  Date;
+    last_invited_to_platform_at: null;
+    education:                   null | string;
+    
+    
+    is_2fa_enabled:              boolean;
+    default_2fa_type:            null | string;
+    created_at:                  Date;
+    updated_at:                  Date;
+    isMyContact:                 boolean;
 }

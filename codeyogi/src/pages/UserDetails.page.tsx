@@ -15,7 +15,7 @@ const UserDetailsPage: React.FC<Props> = ({ className }) => {
   const user = useAppSelector(userSelector);
   
   const dispatch = useDispatch();
-  console.log(id);
+  
   useEffect(() => {
     dispatch(fetchOneUser(id));
   }, [id]);//eslint-disable-line  react-hooks/exhaustive-deps

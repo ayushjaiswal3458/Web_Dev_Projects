@@ -20,7 +20,7 @@ export interface LoginResponse {
 
 export const meLogin = (data: LoginRequest) => {
     const url = BASE_URL + "/login";
-    console.log(data);
+    
     // return fetch(url, {
     //     method: "POST",
     //     body: JSON.stringify(data),

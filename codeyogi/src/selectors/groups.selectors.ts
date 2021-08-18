@@ -1,3 +1,4 @@
+
 import { createSelector } from "reselect";
 // import { AppState } from "../store";
 import { groupsStateSelector } from "./app.selectors";
@@ -24,7 +25,7 @@ export const groupQueryMapSelector = createSelector([groupsStateSelector],(group
 export const groupByIdSelector = createSelector([groupsStateSelector],(groupState)=>groupState.byId);
 
 export const groupIdSelector = createSelector([groupsStateSelector] , (groupState) => {
-    console.log("id slected");
+    
     return groupState.selectedId;
 });
 
@@ -62,3 +63,24 @@ export const groupOneErrorSelector = createSelector([groupsStateSelector], (stat
 export const groupCreatorByIdSelector = createSelector([groupsStateSelector] , (state) => state.creators);
 export const groupCreatorIdSelector = createSelector([groupCreatorByIdSelector,groupIdSelector], (byId,id) => id && byId[id] );
 export const groupCreatorSelector = createSelector([usersByIdSelector,groupCreatorIdSelector] , (byId, id) => id && byId[id]);
+
+export const groupParticipantsByIdSelector = createSelector([groupsStateSelector] , (state) => state.participants);
+export const groupParticipantsSelector = createSelector([groupParticipantsByIdSelector,groupIdSelector,usersByIdSelector] , (parById, gid, userById) => {
+    const participantsIds = parById[gid!];
+    if(participantsIds === undefined){
+        return [];
+    }
+    const participants = participantsIds.map((id) => id && userById[id]);
+    return participants;
+
+}) 
+
+export const groupInvMemByIdSelector = createSelector([groupsStateSelector] , (state) => state.invitedMembers);
+export const groupInvMemSelector = createSelector( [ groupInvMemByIdSelector,groupIdSelector,usersByIdSelector], (memById, gid , usersById) =>{
+    const invMemIds = memById[gid!];
+    if(invMemIds === undefined){
+        return []
+    }
+    const invMembers = invMemIds.map((id) => id && usersById[id]);
+    return invMembers;
+})

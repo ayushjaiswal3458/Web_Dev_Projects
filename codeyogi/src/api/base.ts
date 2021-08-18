@@ -9,7 +9,7 @@ axios.interceptors.request.use((config) => {
     if (!token) {
         return config;
     }
-    console.log("hi");
+    
     return { ...config, headers: { ...config.headers, Authorization: token } };
 });
 
@@ -17,7 +17,7 @@ axios.interceptors.response.use(undefined, (error) => {
     console.log("error is ", error);
     if (error.response?.data?.code === 9101) {
         localStorage.removeItem(LS_AUTH_TOKEN);
-        window.location.href = "/login";
+        
     }
 
     return Promise.reject(error);

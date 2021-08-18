@@ -1,3 +1,4 @@
+
 import { meLogout, meLogin, me } from "./../api/auth";
 import {  ON_LOGIN, ON_LOGOUT, USER_FETCH } from "./../actions/actions.constants";
 import { meLoginAction } from "./../actions/auth.action";
@@ -15,6 +16,7 @@ import { AnyAction } from "redux";
 import { meFetchAction } from "../actions/auth.action";
 import { LS_AUTH_TOKEN } from "../api/base";
 
+
 function* login(action: AnyAction): Generator<any> {
     
   const res: any = yield call(meLogin, action.payload);
@@ -24,7 +26,9 @@ function* login(action: AnyAction): Generator<any> {
 }
 
 function* logout(): Generator<any> {
+  
   yield call(meLogout);
+  
 }
 
 
@@ -35,7 +39,6 @@ function* userFetch(): Generator<any> {
 
 
 export function* watchAuth() {
-  console.log("watchMeFetchcalled");
-
+  
   yield all([takeEvery(ON_LOGIN, login), takeEvery(ON_LOGOUT, logout),  takeEvery(USER_FETCH,userFetch)]);
 }

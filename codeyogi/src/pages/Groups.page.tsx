@@ -65,7 +65,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
           }
           return (
             <div
-              
+              key = {profile.id}
               className={`flex  border rounded-lg mt-2 h-20 w-96 ` + rowColour}
             >
               <img

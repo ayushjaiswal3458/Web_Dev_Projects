@@ -3,12 +3,14 @@ import React, { Fragment } from "react";
 import {FC, memo } from "react";
 import { FiInbox, FiLock, FiUser } from "react-icons/fi";
 import { IoExitOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 
 
 
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { onLogoutAction } from "./actions/auth.action";
 
-import { meLogout } from "./api/auth";
+
 
 import { meSelector } from "./selectors/auth.selectors";
 
@@ -24,8 +26,8 @@ className?:string;
 const UserProfileDropdown: FC<Props> = ({className}) => {
     
     const user = useAppSelector(meSelector);
-    const history = useHistory();
-    
+  
+    const dispatch = useDispatch();    
     return (
         <Menu as="div" className={` ${className}`}>
             <Fragment >
@@ -66,9 +68,9 @@ const UserProfileDropdown: FC<Props> = ({className}) => {
                 </Menu.Item>
                 <Menu.Item>
                     { ({active }) => (
-                        <button  onClick={() => { meLogout();
-                            history.push("/login");
-                            }} className={`py-2 flex px-3.5 ${active ? "text-indigoish" : "text-black" } `} >
+                        <button  onClick={() =>  {dispatch(onLogoutAction());
+                            window.location.href = "/login";
+                        }} className={`py-2 flex px-3.5 ${active ? "text-indigoish" : "text-black" } `} >
                             <IoExitOutline className = {`w-4 h-4 mt-2 ${active ? "text-indigoish" : "text-black" } `} />
                             Sign Out
                         </button>

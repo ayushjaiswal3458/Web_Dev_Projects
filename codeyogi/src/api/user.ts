@@ -1,5 +1,6 @@
+import { User } from './../models/User';
 import axios from 'axios';
-import { People } from './../models/People';
+
 import { BASE_URL } from './base';
 export interface UserRequest {
     __type:"listAll";
@@ -7,7 +8,7 @@ export interface UserRequest {
 }
 
 export interface UsersResponse {
-    data:People[];
+    data:User[];
 }
 
 export interface UserRequestByid{
@@ -15,7 +16,7 @@ export interface UserRequestByid{
 }
 
 export interface UserOneResponse {
-    User:People;
+    User:User;
 }
 export const fetchUsers = () => {
     const url =BASE_URL + "/people";

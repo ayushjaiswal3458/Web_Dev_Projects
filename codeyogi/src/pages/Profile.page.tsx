@@ -34,7 +34,7 @@ const ProfilePage: FC<Props> = () => {
     enableReinitialize: true,
     onSubmit: (userData) => {
       meUpdate(userData);
-      console.log("submit");
+      
     },
   });
   return (

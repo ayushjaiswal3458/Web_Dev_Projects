@@ -30,7 +30,7 @@ const Signup: FC<Props> = (props) => {
       }),
 
       onSubmit: (data) => {
-        console.log("form submitting", data);
+        
         setTimeout(() => {
           history.push("/login");
         }, 5000);

@@ -8,9 +8,9 @@ interface Props{
 }
 
 const AuthHero: FC<Props> = (props) => {
-    console.log("authpage rendering");
+    
     useEffect(() => {
-        console.log("authpage rendering for the first time");
+        
     })
     return (
         <div className="hidden w-1/2 h-screen Auth:inline bg-AuthHero ">

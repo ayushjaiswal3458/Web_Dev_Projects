@@ -8,8 +8,10 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 import {
   groupCreatorSelector,
+  groupInvMemSelector,
   groupLoadingSelector,
   groupOneErrorSelector,
+  groupParticipantsSelector,
   groupSelector,
   nextIdSelector,
   prevIdSelector,
@@ -21,16 +23,18 @@ interface Props {}
 const GroupDetailsPage: React.FC<Props> = (props) => {
   const group = useAppSelector(groupSelector);
   const groupId = +useParams<{ groupId: string }>().groupId;
-  console.log(groupId);
+  
 
   const nextId = useAppSelector(nextIdSelector);
   const prevId = useAppSelector(prevIdSelector);
   const groupLoading = useAppSelector(groupLoadingSelector);
   const groupError = useAppSelector(groupOneErrorSelector);
   const groupCreator = useAppSelector(groupCreatorSelector);
+  const groupParticipants = useAppSelector(groupParticipantsSelector);
+  const groupInvMems = useAppSelector(groupInvMemSelector);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("this");
+    
     dispatch(fetchOneGroup(groupId));
   }, [groupId]); //eslint-disable-line
 
@@ -45,13 +49,13 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className=" mt-20 mx-4 rounded-lg bg-gray-400 w-full  ">
+    <div className=" mt-20 mx-4 relative rounded-lg bg-gray-400 w-full  ">
       {groupLoading && (
-        <Alerts strong="Group Loading " theme="indigo">
+        <Alerts strong="Group Loading " theme="green" className="absolute -top-10 z-10 w-96 left-28   ">
           Please wait...
         </Alerts>
       )}
-      <div className="rounded-lg shadow-lg bg-white m-4 p-4">
+      <div className="rounded-lg relative shadow-lg bg-white m-4 py-4 px-10">
         <h1 className="text-xl font-semibold ">Group information </h1>
         {group && (
           <div className="my-2 flex">
@@ -69,20 +73,24 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
               <p>Group Name : {group && group.name}</p>
               <p>Group Description : {group && group.description}</p>
               <Link to={`/groups/${prevId}`}>
-                <button onClick={() => dispatch(fetchOneGroup(prevId!))}>
-                  <GrFormPrevious className="p-2 rounded-full text-black w-10 h-10 bg-gray-200 shadow-2xl" />
+                <button onClick={() => dispatch(fetchOneGroup(prevId!))} className="absolute top-20 left-0">
+                  <GrFormPrevious className="p-2 rounded-full  text-black w-10 h-10 hover:bg-gray-400 bg-gray-200 shadow-2xl" />
                 </button>
               </Link>
               <Link to={`/groups/${nextId}`}>
-                <button onClick={() => dispatch(fetchOneGroup(nextId!))}>
-                  <GrFormNext className="p-2 rounded-full text-black w-10 h-10 bg-gray-200 shadow-2xl" />
+                <button onClick={() => dispatch(fetchOneGroup(nextId!))} className="absolute top-20 right-0">
+                  <GrFormNext className="p-2 rounded-full text-black w-10 h-10 hover:bg-gray-400 bg-gray-200 shadow-2xl" />
                 </button>
               </Link>
             </div>
           </div>
         )}
       </div>
-      <div className="p-2 rounded-lg m-4 bg-white ">group creator:{groupCreator && groupCreator.first_name}</div>
+      <div className="p-2 rounded-lg m-4 bg-white ">
+        <p>group creator:{groupCreator && groupCreator.first_name}</p>
+        { groupParticipants !== [] && <div>group participants: { groupParticipants.map((par) => <p key={par && par.id}>{ par && par.first_name}</p>)}</div>}
+        { groupInvMems !== [] && <div> invited Members : {groupInvMems.map((mem) => <p key = {mem &&  mem.id}>{mem && mem.first_name}</p>)}</div>}
+      </div>
     </div>
   );
 };
