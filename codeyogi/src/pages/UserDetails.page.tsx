@@ -20,9 +20,9 @@ const UserDetailsPage: React.FC<Props> = ({ className }) => {
     dispatch(fetchOneUser(id));
   }, [id]);//eslint-disable-line  react-hooks/exhaustive-deps
   return (
-    <div className="m-4 mt-20 p-16 bg-gray-400 rounded-lg w-full h-screen">
+    <div className="ml-4 mr-4  mt-20 px-4 py-16  md:p-16 bg-gray-400 w-full rounded-lg h-screen">
       {user && (
-        <div className="p-4 relative shadow-2xl md:h-64 h-68 bg-indigo-400 rounded-lg ">
+        <div className="p-4 relative shadow-2xl md:h-64 h-68  bg-indigo-400 rounded-lg ">
           <div className=" absolute -top-14 left-1/4 md:-top-14 md:-left-10 ">
             <img
               src={user.profile_pic_url}

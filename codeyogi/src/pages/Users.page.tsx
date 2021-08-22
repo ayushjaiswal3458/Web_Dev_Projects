@@ -21,8 +21,8 @@ const UsersPage: React.FC<Props> = ({ className }) => {
     return <div className="bg-500 w-full h-full z-30">loading</div>;
   }
   return (
-    <div className={`${className} p-8`}>
-        <div className="grid grid-cols-2 gap-4">
+    <div className={`${className} p-8 w-full`}>
+        <div className="grid md:grid-cols-5 sm:grid-cols-4 w-screen grid-cols-2 gap-1 md:gap-4">
       {users &&
         users.map((user) => {
           return (
