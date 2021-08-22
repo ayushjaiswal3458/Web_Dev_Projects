@@ -1,3 +1,12 @@
-import { AppState } from "../store";
+import { authsStateSelector } from "./app.selectors";
+import { createSelector } from "reselect";
+import { usersByIdSelector } from "./users.selectors";
 
-export const meSelector = (state:AppState) => state.auths.id===undefined ? undefined :  state.users.byId[state.auths.id];
+export const meIdSelector = createSelector(
+  [authsStateSelector],
+  (state) => state.id
+);
+export const meSelector = createSelector(
+  [meIdSelector, usersByIdSelector],
+  (id, byId) =>  id === undefined ? undefined : byId[id]
+);

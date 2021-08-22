@@ -12,14 +12,15 @@ import {
 
 import { Group } from "../models/Group";
 import {
-  addMany,
-  addOne,
+  
+  
   EntityState,
-  getIds,
+  
   initialEntityState,
   select,
   setErrorOne,
 } from "./entity.reducer";
+
 
 interface GroupState extends EntityState<Group> {
   query: string;
@@ -47,28 +48,30 @@ export const groupReducer: Reducer<GroupState> = (
   action
 ) => {
   switch (action.type) {
-    case GROUPS_QUERY_CHANGED:
+    case GROUPS_QUERY_CHANGED:{
       const query = action.payload;
       return { ...state, query: query, loadingList: true };
-    case GROUPS_QUERY_COMPLETED:
-      const groups = action.payload.groups as Group[];
-
-      const groupIds = getIds(groups);
-
-      const newState = addMany(state, groups) as GroupState;
+    }
+    case GROUPS_QUERY_COMPLETED:{
+      const groupsById = action.payload.groupsById ;
+      const groupIds = Object.keys(groupsById);
+      
       return {
-        ...newState,
+        ...state,
+        byId:{...state.byId, ...groupsById},
         queryMap: {
-          ...newState.queryMap,
+          ...state.queryMap,
           [action.payload.query]: groupIds,
         },
         loadingList: false,
       };
-    case SELECT_GROUPID:
+    }
+    case SELECT_GROUPID:{
       return { ...state, selectedId: action.payload };
-
-    case FETCH_ONE_GROUP:
-      const currId = action.payload as number;
+    }
+    case FETCH_ONE_GROUP:{
+      const currId = action.payload ;
+      
       if (state.selectedId === currId) {
         
         return state;
@@ -76,9 +79,10 @@ export const groupReducer: Reducer<GroupState> = (
       let nextId = currId;
       let prevId = currId;
       try {
-        const groupIdsArray = state.queryMap[state.query];
+        const groupIdsArray = state.queryMap[state.query] as any[];
         
-        const currIndex = groupIdsArray.indexOf(currId);
+        const currIndex = groupIdsArray.indexOf(currId.toString());
+       console.log(currIndex);
         if (currIndex !== 0) {
           prevId = groupIdsArray[currIndex - 1];
         }
@@ -88,30 +92,35 @@ export const groupReducer: Reducer<GroupState> = (
       } catch (e) {
         console.log("page reloaded query deleted so next and previous wont work");
       }
-      console.log("new state");
-      return select(state, currId, nextId, prevId) as GroupState;
-
-    case FETCH_ONE_GROUP_COMPLETED:
-      const group = action.payload as Group;
       
-      const creatorId = group.creator!.id;
-      const participantsIds = group.participants.map(
-        (participant) => participant.id
-      );
-      const invitedMembersIds = group.invitedMembers.map((member) => member.id);
-      const newGroupState = addOne(state, group, false) as GroupState;
-      return {
-        ...newGroupState,
-        creators: { ...newGroupState.creators, [group.id]: creatorId },
+      return select(state, currId, nextId, prevId) as GroupState;
+    }
+    case FETCH_ONE_GROUP_COMPLETED:{
+      const groupById= action.payload 
+      
+      if(state.selectedId===undefined){
+        return state;
+      }
+      const group = groupById[state.selectedId!];
+      if(!group){
+        return state;
+      }
+      
+       return {
+        ...state,
+        byId:{...state.byId, ...groupById},
+        creators: { ...state.creators, [group.id]: group.creator },
         participants: {
-          ...newGroupState.participants,
-          [group.id]: participantsIds,
+          ...state.participants,
+          [group.id]: group.participants,
         },
         invitedMembers: {
-          ...newGroupState.invitedMembers,
-          [group.id]: invitedMembersIds,
+          ...state.invitedMembers,
+          [group.id]: group.invitedMembers,
         },
+        loadingOne:false
       };
+    }
     case FETCH_ONE_GROUP_ERROR:
       const { id, msg } = action.payload;
 

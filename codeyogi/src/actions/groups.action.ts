@@ -11,10 +11,10 @@ export const queryChangedAction = (query : string) => ({
 }
 );
 
-export const queryCompletedAction = (query: string, groups: Group[] ) => (
+export const queryCompletedAction = (query: string, groupsById: { [groupId: number] : Group }  ) => (
     {
         type:GROUPS_QUERY_COMPLETED,
-        payload:{query, groups}
+        payload:{query, groupsById}
     }
 );
 export const selectId = (id:number) => (
@@ -24,8 +24,8 @@ export const fetchOneGroup = (id:number) => (
     {type:FETCH_ONE_GROUP , payload: id}
 );
 
-export const fetchOneGroupCompleted = (group:Group) => (
-    {type:FETCH_ONE_GROUP_COMPLETED, payload:group}
+export const fetchOneGroupCompleted = (groupById:{[groupId:number] : number}) => (
+    {type:FETCH_ONE_GROUP_COMPLETED, payload:groupById}
 );
 
 export const fetchOneGroupError = (id:number, msg:string) => ({

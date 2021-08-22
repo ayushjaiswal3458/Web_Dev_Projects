@@ -22,8 +22,8 @@ export const fetchOneUserError = (id:number, msg:string) => ({
     type:FETCH_ONE_USER_ERROR,payload:{id,msg}
 });
 
-export const fetchUsersAction = (users:User[]) => ({
-    type:FETCH_USERS , payload:users
+export const fetchUsersAction = (usersById:{[userId:number] : User}) => ({
+    type:FETCH_USERS , payload:usersById
 });
 
 export const fetchPeople = () => ({

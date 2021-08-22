@@ -1,9 +1,9 @@
 import { Reducer } from "redux";
-import { FETCH_ONE_GROUP_COMPLETED, FETCH_ONE_USER, FETCH_ONE_USER_COMPLETED, FETCH_ONE_USER_ERROR, FETCH_USERS, ME_FETCH, ME_LOGIN, SELECT_USERID } from "../actions/actions.constants";
-import { Group } from "../models/Group";
+import {  FETCH_ONE_USER, FETCH_ONE_USER_COMPLETED, FETCH_ONE_USER_ERROR, FETCH_USERS, ME_FETCH, ME_LOGIN, SELECT_USERID } from "../actions/actions.constants";
+
 
 import { User } from "../models/User";
-import { addMany, addOne, EntityState, initialEntityState, setErrorOne } from "./entity.reducer";
+import { addOne, EntityState, initialEntityState, setErrorOne } from "./entity.reducer";
 
 
 interface UserState extends EntityState<User> {
@@ -25,9 +25,9 @@ export const userReducer : Reducer<UserState> = (state = initialState,action) =>
             case SELECT_USERID:
                 return { ...state, selectedId: action.payload };
               case FETCH_USERS:
-                  const users = action.payload as User[];
+                  const usersByIds = action.payload;
                   
-                  return addMany(state,users) as UserState;  
+                  return {...state, byId:{...state.byId,...usersByIds}};
               case FETCH_ONE_USER:
                 return {
                   ...state,
@@ -41,24 +41,9 @@ export const userReducer : Reducer<UserState> = (state = initialState,action) =>
                 const { id, msg } = action.payload;
           
                 return setErrorOne(state, id, msg) as UserState;
-              case FETCH_ONE_GROUP_COMPLETED:{
-                  const group = action.payload as Group;
-                  if(group === undefined ) {
-                       return state;
-                  }
-                const creator = group.creator;
-                const participants = group.participants;
-                const invitedMembers = group.invitedMembers;
-                const participantsById = participants.reduce((prevParticipant, currParticipant) => {
-                    return {...prevParticipant, [currParticipant.id]:currParticipant};
-                },{});
-                const invitedMembersById = invitedMembers.reduce((prevMem, currMem) => {
-                    return {...prevMem, [currMem.id]:currMem};
-                },{});
-
-                 
-                return  {...state, byId:{...state.byId, [creator.id]: creator, ...participantsById, ...invitedMembersById}};    
-              }
+                
+                
+              
         default:
             return state;   
         } 
