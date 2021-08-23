@@ -12,7 +12,7 @@ interface Props{
 const Nav: FC<Props> = ({className}) => {
     var ClassNames = require('classnames');
     return (
-        <nav className={ClassNames("bg-navColor justify-between  fixed  h-13.45 p-1 flex  w-full  z-20" , className)}>
+        <nav className={ClassNames("bg-navColor justify-between  fixed  h-13.45 p-1 flex inset-x-0  z-20" , className)}>
             <div className="flex items-center py-px pl-7">
             <img src="/navLogo.svg" alt="" className="w-8.75   h-8.75 " />
             <h2 className="pl-1 text-2xl font-semibold text-white">CODEYOGI</h2>
