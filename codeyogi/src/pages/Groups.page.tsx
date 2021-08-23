@@ -36,9 +36,9 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
   let rowColour: string;
 
   return (
-    <div className={`${className}   `}>
-      <div className="bg-gray-200 p-4 m-2  rounded-lg w-screen ">
-        <div className="bg-white rounded-lg h-screen p-8 m-4">
+    <div className={`${className}  w-full `}>
+      <div className="bg-gray-200 p-4  mx-2 rounded-lg w-full  max-w-3xl ">
+        <div className="bg-white rounded-lg h-full p-8 m-4">
           <div className="flex  bg-white  ">
             <Input
               theme="indigo"
@@ -48,7 +48,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
               onChange={(event) => {
                 dispatch(queryChangedAction(event.target.value));
               }}
-              className="w-30 mr-2"
+              className="w-full mr-2"
             />
             {isLoading && <ImSpinner2 className="animate-spin w-10 h-10 " />}
           </div>
@@ -63,7 +63,7 @@ const GroupsPage: React.FC<Props> = ({ className }) => {
                 <div
                   key={profile.id}
                   className={
-                    `flex  border rounded-lg mt-2 h-20 w-96 ` + rowColour
+                    `flex  border rounded-lg mt-2 h-24 md;h-20 ` + rowColour
                   }
                 >
                   <img

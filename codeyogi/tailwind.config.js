@@ -23,6 +23,9 @@ module.exports = {
       textColor: {
         'indigoish':'#4361ee'
      },
+     scale:{
+       "104":"1.04"
+     },
      colors:{
       'indigoish':'#4361ee',
       'grayish':'#3b3f5c',

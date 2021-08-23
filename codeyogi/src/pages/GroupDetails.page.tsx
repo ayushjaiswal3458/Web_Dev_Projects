@@ -51,7 +51,7 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className=" mt-13.45 w-screen relative  rounded-lg   ">
+    <div className=" mt-13.45 w-full relative  rounded-lg   ">
       {groupLoading && (
         <Alerts
           strong="Group Loading "
@@ -61,8 +61,8 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
           Please wait...
         </Alerts>
       )}
-      <div className="bg-gray-400 rounded-lg relative m-2 mx-auto  md:m-4 p-1 md:p-6 h-screen w-screen">
-        <div className="rounded-lg relative shadow-lg flex  flex-col justify-center md:flex items-center hover:bg-indigoish hover:scale-110 transform  duration-500 bg-white m-4 py-4 px-10 max-w-4xl hover:text-white mx-auto ">
+      <div className="bg-gray-400 rounded-lg relative m-2 mx-auto  md:m-4 p-3 md:p-6 h-full w-full">
+        <div className="rounded-lg relative shadow-lg flex  flex-col justify-center md:flex items-center hover:bg-indigoish hover:scale-104 transform  duration-500 bg-white m-4 py-4 px-10 max-w-4xl hover:text-white mx-auto ">
           <h1 className="text-xl  font-semibold whitespace-nowrap">
             Group information{" "}
           </h1>
@@ -79,14 +79,14 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
                 alt=" "
               />
               </div>
-              <div className="space-y-3 my-4 w-96  md:mt-0 ">
+              <div className="space-y-3 my-4 w-96 p-2 text-center sm:text-left  md:mt-0 ">
                 <p>Group Id: {group && group.id}</p>
                 <p>Group Name : {group && group.name}</p>
                 <p>Group Description : {group && group.description}</p>
                 <Link to={`/groups/${prevId}`}>
                   <button
                     onClick={() => dispatch(fetchOneGroup(prevId!))}
-                    className="absolute md:top-4  top-16 -left-10  hover:scale-110 transform duration-200 md:-left-12"
+                    className="absolute md:top-4  top-16 sm:-left-10 left-4  hover:scale-110 transform duration-200 md:-left-12"
                   >
                     <GrFormPrevious className="p-2 rounded-full  text-black w-10 h-10 hover:bg-gray-400 bg-gray-200 shadow-2xl" />
                   </button>
@@ -94,7 +94,7 @@ const GroupDetailsPage: React.FC<Props> = (props) => {
                 <Link to={`/groups/${nextId}`}>
                   <button
                     onClick={() => dispatch(fetchOneGroup(nextId!))}
-                    className="absolute md:top-4 top-16  -right-10 hover:scale-110 transform duration-200 md:-right-8 "
+                    className="absolute md:top-4 top-16  right-4 sm:-right-10 hover:scale-110 transform duration-200 md:-right-8 "
                   >
                     <GrFormNext className="p-2 rounded-full  text-black w-10 h-10  hover:bg-gray-400 bg-gray-200 shadow-2xl" />
                   </button>
