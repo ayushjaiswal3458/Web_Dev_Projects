@@ -22,7 +22,7 @@ interface Props {
 const AppContainer: FC<Props> = () => {
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebarOpen );
   return (
-    <div className={`flex justify-between ${isSidebar && "-translate-x-48 transform duration-1000"} ${!isSidebar && "translate-x-0 transform duration-1000"} `}>
+    <div className={`flex  justify-between ${isSidebar && "-translate-x-48 transform duration-1000"} ${!isSidebar && "translate-x-0 transform duration-1000"} `}>
       
       <Sidebar className="mt-13.45" />
       
